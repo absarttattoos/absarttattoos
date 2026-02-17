@@ -1,0 +1,3719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AbsArt Tattoos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f0ece6;
+      --gold: #c9a85c;
+      --gray: #a0998f;
+      --light-gray: #1a1a1a;
+      --border: rgba(201,168,92,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* Custom Cursor */
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease;
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(184,152,90,0.5);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.08s ease, width 0.2s, height 0.2s, opacity 0.2s;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.6rem 4rem;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.97) 60%, transparent);
+      backdrop-filter: blur(6px);
+    }
+
+    .logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .logo-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-mark {
+      width: 52px;
+      height: 49px;
+      flex-shrink: 0;
+      opacity: 0.92;
+    }
+    .logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      line-height: 1;
+    }
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .logo-name .logo-art { color: var(--gold); }
+    .logo-name .logo-tattoos {
+      font-size: 0.62em;
+      letter-spacing: 0.32em;
+      color: #a09890;
+      margin-left: 0.1em;
+      font-weight: 300;
+    }
+    .logo-slogan {
+      font-size: 0.52rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      font-weight: 400;
+    }
+
+    /* Desktop flat nav */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #bdb5aa;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+      font-weight: 400;
+      padding: 0.4rem 0.85rem;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a.nav-active { color: var(--gold); }
+
+    /* Divider dots between nav links */
+    .nav-links li:not(:last-child)::after {
+      content: '·';
+      color: rgba(201,168,92,0.25);
+      font-size: 0.7rem;
+    }
+
+    /* Book CTA in nav */
+    .nav-book-cta {
+      display: inline-block;
+      margin-left: 1rem;
+      padding: 0.45rem 1.2rem;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      font-size: 0.65rem !important;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s !important;
+    }
+    .nav-book-cta:hover {
+      background: var(--gold) !important;
+      color: var(--black) !important;
+    }
+
+    /* ── Mobile bottom tab bar ───────────────────────────────────────────── */
+    .mob-bar {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(10,10,10,0.98);
+      border-top: 1px solid rgba(201,168,92,0.2);
+      backdrop-filter: blur(16px);
+      height: 88px;
+    }
+    .mob-bar-inner {
+      display: flex;
+      height: 100%;
+      align-items: stretch;
+      justify-content: space-between;
+      padding: 0;
+    }
+    .mob-tab {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      text-decoration: none;
+      color: #6b6460;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      border: none;
+      background: none;
+      font-family: 'Lato', sans-serif;
+      cursor: pointer;
+      padding: 10px 18px;
+      position: relative;
+      min-width: 54px;
+    }
+    /* Pin Work to left wall, More to right wall */
+    .mob-tab:first-child { padding-left: 20px; padding-right: 12px; }
+    .mob-tab:last-child  { padding-right: 20px; padding-left: 12px; margin-left: auto; }
+    .mob-tab svg {
+      width: 28px; height: 28px;
+      stroke-width: 1.4;
+      transition: stroke 0.2s;
+    }
+    .mob-tab:hover { color: #a09890; }
+    .mob-tab.nav-active { color: var(--gold); }
+    .mob-tab.nav-active svg { stroke: var(--gold); }
+    .mob-tab.nav-active::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      width: 18px; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    /* Book tab — bolder icon, no fill, no colour difference */
+    .mob-tab-book svg {
+      width: 30px; height: 30px;
+      stroke-width: 2.2;
+    }
+
+    /* More drawer */
+    .mob-more-drawer {
+      display: none;
+      position: fixed;
+      bottom: 88px; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      border-top: 1px solid var(--border);
+      z-index: 199;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      flex-wrap: wrap;
+      padding: 1.2rem;
+      gap: 0.7rem;
+    }
+    .mob-more-drawer.open { transform: translateY(0); }
+    .mob-more-link {
+      flex: 1 1 calc(50% - 0.7rem);
+      padding: 1.3rem 1rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--white);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .mob-more-link svg { width: 18px; height: 18px; stroke: var(--gold); flex-shrink: 0; }
+    .mob-more-link:hover { border-color: var(--gold); color: var(--gold); }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .mob-bar { display: flex; }
+      .mob-more-drawer { display: flex; }
+      body { padding-bottom: 88px; }
+      section, footer { scroll-margin-bottom: 88px; }
+    }
+
+    /* Hero */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-line {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--gold));
+      margin-bottom: 2rem;
+      animation: lineGrow 1.2s ease forwards;
+      transform-origin: top;
+    }
+    @keyframes lineGrow {
+      from { transform: scaleY(0); opacity: 0; }
+      to { transform: scaleY(1); opacity: 1; }
+    }
+
+    .hero-tag {
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+      font-weight: 400;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 9vw, 8rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      color: #c8bfb5;
+      max-width: 360px;
+      line-height: 1.9;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+      font-weight: 400;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1s forwards;
+    }
+
+    .btn-primary {
+      padding: 0.9rem 2.5rem;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #d9b86a; transform: translateY(-2px); }
+
+    .btn-ghost {
+      padding: 0.9rem 2.5rem;
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 400;
+      transition: border-color 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem; right: 4rem;
+      writing-mode: vertical-rl;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--gray);
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.4s forwards;
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--gray), transparent);
+      margin: 1rem auto 0;
+    }
+
+    /* Decorative background */
+    .hero-bg-text {
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(8rem, 18vw, 18rem);
+      font-weight: 300;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(184,152,90,0.07);
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Shared */
+    section { padding: 8rem 4rem; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 500;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4.5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    h2 em { font-style: italic; color: var(--gold); }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 0 4rem;
+      width: calc(100% - 8rem);
+    }
+
+    /* Portfolio */
+    #portfolio { background: var(--black); }
+
+    .portfolio-intro {
+      max-width: 480px;
+      margin-bottom: 3.5rem;
+    }
+    .portfolio-intro p {
+      color: #c0b8ae;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      font-weight: 400;
+    }
+
+    /* ── Peek Slider ── */
+    .pf-slider-wrap {
+      position: relative;
+      /* side padding creates the peek effect */
+      padding: 0 10%;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+
+    .pf-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .pf-slide {
+      flex: 0 0 80%;
+      aspect-ratio: 3/2;
+      max-height: 72vh;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      transform: scale(0.94);
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+      opacity: 0.5;
+    }
+    .pf-slide.active {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .portfolio-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+    }
+    .portfolio-placeholder .ph-icon {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .portfolio-placeholder .ph-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; }
+    .portfolio-placeholder span {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+
+    /* Arrow buttons */
+    .pf-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 48px; height: 48px;
+      border: 1px solid rgba(201,168,92,0.35);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(6px);
+      color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      cursor: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .pf-arrow svg { width: 18px; height: 18px; }
+    .pf-arrow:hover { border-color: var(--gold); background: rgba(201,168,92,0.1); }
+    .pf-arrow:disabled { opacity: 0.2; pointer-events: none; }
+    .pf-arrow-prev { left: 1.5%; }
+    .pf-arrow-next { right: 1.5%; }
+
+    /* Progress bar */
+    .pf-progress-wrap {
+      height: 2px;
+      background: rgba(201,168,92,0.1);
+      margin-top: 2rem;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .pf-progress-bar {
+      height: 100%;
+      background: var(--gold);
+      width: 0%;
+      transition: width 0.1s linear;
+      border-radius: 2px;
+    }
+
+    /* Dots */
+    .pf-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1.2rem;
+    }
+    .pf-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(201,168,92,0.25);
+      border: none;
+      padding: 0;
+      cursor: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .pf-dot.active {
+      background: var(--gold);
+      transform: scale(1.4);
+    }
+
+    .portfolio-note {
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* Booking */
+    #booking {
+      background: #0d0d0d;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .booking-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .booking-info p {
+      color: #c0b8ae;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .booking-steps {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      opacity: 0.4;
+      line-height: 1;
+      min-width: 30px;
+    }
+    .step-text h4 {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .step-text p {
+      font-size: 0.88rem;
+      color: #bdb5aa;
+      line-height: 1.75;
+    }
+
+    .booking-action {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-top: 1rem;
+    }
+
+    .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 2rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--white);
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .whatsapp-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+      z-index: 0;
+    }
+    .whatsapp-btn:hover::before { transform: translateX(0); }
+    .whatsapp-btn:hover { color: var(--black); border-color: var(--gold); }
+    .whatsapp-btn svg { width: 20px; height: 20px; position: relative; z-index: 1; }
+    .whatsapp-btn-text { position: relative; z-index: 1; }
+    .whatsapp-btn-text strong {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    .whatsapp-btn-text span {
+      font-size: 0.7rem;
+      color: inherit;
+      opacity: 0.6;
+    }
+    .whatsapp-btn:hover .whatsapp-btn-text span { opacity: 0.7; }
+
+    .booking-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .qr-frame {
+      width: 90px; height: 90px;
+      border: 1px solid var(--border);
+      padding: 6px;
+      background: #fff;
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .qr-frame svg { width: 100%; height: 100%; }
+    .qr-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-align: center;
+    }
+
+    .contact-divider {
+      width: 1px;
+      height: 60px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .phone-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .phone-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .phone-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.08em;
+    }
+    .phone-hint {
+      font-size: 0.7rem;
+      color: #a09890;
+      letter-spacing: 0.05em;
+    }
+
+    .privacy-note {
+      font-size: 0.78rem;
+      color: #a09890;
+      letter-spacing: 0.05em;
+      line-height: 1.7;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+    .privacy-note svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; flex-shrink: 0; margin-top: 1px; }
+
+    /* Aftercare */
+    #aftercare { background: var(--black); }
+
+    .aftercare-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 3rem;
+    }
+
+    .care-card {
+      background: var(--light-gray);
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .care-card:hover { background: #1f1f1f; }
+
+    .care-icon {
+      width: 36px; height: 36px;
+      margin-bottom: 1.5rem;
+    }
+    .care-icon svg { width: 100%; height: 100%; stroke: var(--gold); fill: none; stroke-width: 1.2; }
+
+    .care-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .care-card p {
+      font-size: 0.88rem;
+      color: #bdb5aa;
+      line-height: 1.9;
+      font-weight: 400;
+    }
+
+    .aftercare-timeline {
+      margin-top: 4rem;
+      border-top: 1px solid var(--border);
+      padding-top: 3rem;
+    }
+
+    .timeline-heading {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    .timeline-items {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .timeline-item {
+      padding: 1.5rem 1.5rem 1.5rem 0;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .timeline-item:last-child { border-right: none; padding-right: 0; }
+    .timeline-item::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: absolute;
+      top: -3px; left: 0;
+    }
+    .timeline-item:first-child { padding-left: 1rem; }
+    .timeline-item:first-child::before { left: 1rem; }
+
+    .timeline-day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-item p {
+      font-size: 0.84rem;
+      color: #bdb5aa;
+      line-height: 1.85;
+      padding-left: 1rem;
+    }
+    .timeline-item:first-child p { padding-left: 1rem; }
+
+    /* About */
+    #about {
+      background: #0d0d0d;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-image {
+      aspect-ratio: 3/4;
+      background: var(--light-gray);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--border);
+      pointer-events: none;
+    }
+
+    .about-image-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: linear-gradient(160deg, #151515 0%, #111 100%);
+    }
+    .about-image-inner svg { width: 48px; height: 48px; stroke: rgba(184,152,90,0.25); fill: none; }
+    .about-image-inner span {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: rgba(184,152,90,0.3);
+      text-transform: uppercase;
+    }
+
+    .about-gold-bar {
+      position: absolute;
+      left: -1px; top: 15%; bottom: 15%;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+
+    .about-content p {
+      color: #c0b8ae;
+      font-size: 0.95rem;
+      line-height: 1.95;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #bdb5aa;
+      margin-top: 0.4rem;
+      font-weight: 400;
+    }
+
+    /* Location */
+    #location { background: var(--black); }
+
+    .location-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .location-info { padding-top: 0.5rem; }
+
+    .location-detail {
+      margin-bottom: 2.5rem;
+    }
+    .location-detail-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+    .location-detail p, .location-detail a {
+      font-size: 0.92rem;
+      color: #c0b8ae;
+      line-height: 1.8;
+      text-decoration: none;
+      font-weight: 400;
+    }
+    .location-detail a:hover { color: var(--gold); }
+
+    .hours-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .hour-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: #bdb5aa;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-weight: 400;
+    }
+    .hour-row span:last-child { color: var(--white); font-weight: 400; }
+    .hour-row.closed span:last-child { color: var(--gray); font-style: italic; }
+
+    .map-placeholder {
+      background: var(--light-gray);
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 40px,
+        rgba(184,152,90,0.03) 40px,
+        rgba(184,152,90,0.03) 41px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 40px,
+        rgba(184,152,90,0.03) 40px,
+        rgba(184,152,90,0.03) 41px
+      );
+    }
+    .map-pin {
+      width: 40px; height: 40px;
+      background: var(--gold);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      position: relative;
+      z-index: 1;
+    }
+    .map-pin::after {
+      content: '';
+      width: 16px; height: 16px;
+      background: var(--black);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .map-address {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .map-cta {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.3s;
+    }
+    .map-cta:hover { border-color: var(--gold); }
+
+    /* Footer */
+    footer {
+      background: #080808;
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--gold); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #a09890;
+      transition: color 0.3s;
+      font-weight: 400;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: #7a7268;
+      letter-spacing: 0.1em;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav { padding: 1.5rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      #hero { padding: 0 1.5rem; }
+      .hero-bg-text { display: none; }
+      h1 { font-size: 3rem; }
+      .booking-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .aftercare-grid { grid-template-columns: 1fr; }
+      .timeline-items { grid-template-columns: 1fr 1fr; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .location-layout { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .divider { margin: 0 1.5rem; width: calc(100% - 3rem); }
+    }
+
+    .about-social {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .insta-qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .insta-qr-frame {
+      width: 80px; height: 80px;
+      border: 1px solid var(--border);
+      padding: 5px;
+      background: #fff;
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .insta-qr-label {
+      font-size: 0.52rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-align: center;
+    }
+
+    .insta-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .insta-handle-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .insta-handle-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .insta-handle-link:hover { opacity: 0.75; }
+    .insta-handle-link svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .insta-handle-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+    .insta-hint {
+      font-size: 0.72rem;
+      color: #a09890;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Mood Board ─────────────────────────────────────────────────────── */
+    #moodboard { background: var(--black); }
+
+    .mb-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .mb-step {
+      margin-bottom: 2.2rem;
+    }
+    .mb-step-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .mb-step-num {
+      width: 20px; height: 20px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.55rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .mb-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .mb-chip {
+      padding: 0.5rem 1.1rem;
+      border: 1px solid rgba(201,168,92,0.2);
+      background: transparent;
+      color: #a09890;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      cursor: none;
+      font-family: 'Lato', sans-serif;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .mb-chip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+      z-index: 0;
+    }
+    .mb-chip span { position: relative; z-index: 1; }
+    .mb-chip:hover {
+      border-color: rgba(201,168,92,0.5);
+      color: var(--white);
+    }
+    .mb-chip.selected::before { transform: scaleX(1); }
+    .mb-chip.selected {
+      border-color: var(--gold);
+      color: var(--black);
+      font-weight: 600;
+    }
+
+    .mb-generate-btn {
+      margin-top: 2rem;
+      padding: 1rem 2.5rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-family: 'Lato', sans-serif;
+      cursor: none;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .mb-generate-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .mb-generate-btn:hover::before { transform: translateX(0); }
+    .mb-generate-btn:hover { color: var(--black); }
+    .mb-generate-btn span, .mb-generate-btn svg { position: relative; z-index: 1; }
+    .mb-generate-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .mb-generate-btn:disabled::before { transform: translateX(-100%); }
+
+    /* Result panel */
+    .mb-result {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+    .mb-result.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .mb-result-card {
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      background: #0d0d0d;
+      position: relative;
+      overflow: hidden;
+    }
+    .mb-result-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .mb-result-loading {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+    .mb-spinner {
+      width: 24px; height: 24px;
+      border: 1.5px solid rgba(201,168,92,0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .mb-loading-text {
+      font-size: 0.75rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+
+    .mb-result-content { display: none; }
+    .mb-result-content.show { display: block; }
+
+    .mb-direction-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+    .mb-direction-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .mb-direction-title em { font-style: italic; color: var(--gold); }
+    .mb-direction-body {
+      font-size: 0.88rem;
+      color: #c0b8ae;
+      line-height: 1.95;
+      margin-bottom: 1.5rem;
+    }
+
+    .mb-suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+    .mb-suggestion {
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+      font-size: 0.82rem;
+      color: #c0b8ae;
+      line-height: 1.6;
+    }
+    .mb-suggestion-dot {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+    }
+
+    .mb-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .mb-book-link {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: border-color 0.3s;
+    }
+    .mb-book-link:hover { border-color: var(--gold); }
+    .mb-redo {
+      background: none;
+      border: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      cursor: none;
+      font-family: 'Lato', sans-serif;
+      transition: color 0.2s;
+      padding: 0;
+    }
+    .mb-redo:hover { color: var(--white); }
+
+    .mb-selection-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .mb-sel-tag {
+      padding: 0.2rem 0.7rem;
+      background: rgba(201,168,92,0.1);
+      border: 1px solid rgba(201,168,92,0.2);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .mb-layout { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    /* ── Style Quiz ──────────────────────────────────────────────────────── */
+    #stylequiz { background: #0d0d0d; border-top: 1px solid var(--border); }
+
+    .sq-wrap { max-width: 860px; }
+
+    .sq-progress-wrap {
+      height: 2px;
+      background: rgba(201,168,92,0.12);
+      margin-bottom: 0.6rem;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .sq-progress-bar {
+      height: 100%;
+      background: var(--gold);
+      width: 20%;
+      transition: width 0.5s ease;
+      border-radius: 2px;
+    }
+    .sq-progress-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Question */
+    .sq-question {
+      display: none;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+    .sq-question.active { display: flex; }
+
+    .sq-q-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .sq-q-text em { font-style: italic; color: var(--gold); }
+
+    .sq-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .sq-option {
+      border: 1px solid rgba(201,168,92,0.18);
+      background: rgba(255,255,255,0.02);
+      padding: 1.4rem 1.6rem;
+      cursor: none;
+      transition: all 0.22s;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      text-align: left;
+      font-family: 'Lato', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+    .sq-option::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(201,168,92,0.07);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .sq-option:hover::before { transform: scaleX(1); }
+    .sq-option:hover { border-color: rgba(201,168,92,0.5); }
+    .sq-option.chosen {
+      border-color: var(--gold);
+      background: rgba(201,168,92,0.1);
+    }
+    .sq-option.chosen::before { transform: scaleX(1); }
+
+    .sq-opt-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      filter: grayscale(0.3);
+    }
+    .sq-opt-body { position: relative; z-index: 1; }
+    .sq-opt-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.2rem;
+    }
+    .sq-opt-sub {
+      font-size: 0.72rem;
+      color: #a09890;
+      line-height: 1.5;
+    }
+
+    /* Result */
+    .sq-result {
+      display: none;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .sq-result.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sq-result-inner {
+      border: 1px solid var(--border);
+      padding: 3rem;
+      background: #0a0a0a;
+      position: relative;
+      overflow: hidden;
+    }
+    .sq-result-inner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--gold), transparent);
+    }
+
+    .sq-result-eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+    .sq-result-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .sq-result-title em { font-style: italic; color: var(--gold); }
+
+    .sq-result-desc {
+      font-size: 0.92rem;
+      color: #c0b8ae;
+      line-height: 1.9;
+      max-width: 560px;
+      margin-bottom: 1.8rem;
+    }
+
+    .sq-result-traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .sq-trait {
+      padding: 0.35rem 1rem;
+      border: 1px solid var(--border);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .sq-result-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .sq-retake {
+      background: none;
+      border: none;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      cursor: none;
+      font-family: 'Lato', sans-serif;
+      transition: color 0.2s;
+      padding: 0;
+    }
+    .sq-retake:hover { color: var(--white); }
+
+    @media (max-width: 600px) {
+      .sq-options { grid-template-columns: 1fr; }
+      .sq-result-inner { padding: 2rem 1.5rem; }
+    }
+
+    /* ── Testimonials ────────────────────────────────────────────────────── */
+    #testimonials { background: #0d0d0d; }
+
+    .testi-intro { max-width: 480px; margin-bottom: 3.5rem; }
+
+    .testi-track-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .testi-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+    }
+    .testi-card {
+      flex: 0 0 calc(33.333% - 1rem);
+      border: 1px solid var(--border);
+      padding: 2.2rem 2rem;
+      background: #0a0a0a;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .testi-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: rgba(201,168,92,0.08);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .testi-card:hover { border-color: rgba(201,168,92,0.35); }
+
+    .testi-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 1rem;
+    }
+    .testi-star {
+      color: var(--gold);
+      font-size: 0.75rem;
+    }
+
+    .testi-text {
+      font-size: 0.88rem;
+      color: #c0b8ae;
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .testi-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(201,168,92,0.12);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      font-weight: 400;
+      flex-shrink: 0;
+    }
+    .testi-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.06em;
+    }
+    .testi-detail {
+      font-size: 0.68rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+      margin-top: 0.15rem;
+    }
+
+    /* Nav arrows */
+    .testi-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 2.5rem;
+    }
+    .testi-btn {
+      width: 42px; height: 42px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      cursor: none;
+      transition: border-color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .testi-btn svg { width: 16px; height: 16px; }
+    .testi-btn:hover { border-color: var(--gold); background: rgba(201,168,92,0.07); }
+    .testi-btn:disabled { opacity: 0.25; pointer-events: none; }
+
+    .testi-dots {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-left: 0.5rem;
+    }
+    .testi-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s, transform 0.3s;
+      cursor: none;
+      border: none;
+      padding: 0;
+    }
+    .testi-dot.active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+
+    @media (max-width: 900px) {
+      .testi-card { flex: 0 0 calc(80% - 0.5rem); }
+    }
+    @media (max-width: 600px) {
+      .testi-card { flex: 0 0 calc(100% - 0rem); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Placement Visualiser ───────────────────────────────────────────── */
+    #visualiser { background: #0d0d0d; border-top: 1px solid var(--border); }
+
+    .vis-toggle {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+    .vis-toggle-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.4rem;
+      cursor: none;
+      transition: all 0.2s;
+      font-family: 'Lato', sans-serif;
+    }
+    .vis-toggle-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--black);
+      font-weight: 600;
+    }
+    .vis-toggle-btn:not(.active):hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .vis-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .vis-body-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .vis-body-svg {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      display: block;
+    }
+
+    .vis-zone {
+      fill: transparent;
+      stroke: none;
+      cursor: none;
+      transition: fill 0.25s, stroke 0.25s;
+    }
+    .vis-zone:hover, .vis-zone.active {
+      fill: rgba(201,168,92,0.13);
+      stroke: rgba(201,168,92,0.45);
+      stroke-width: 1.5;
+    }
+
+    .vis-dot {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .vis-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,92,0.45);
+      animation: pulseRing 1.5s ease infinite;
+    }
+    @keyframes pulseRing {
+      0%   { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+    .vis-dot.show { opacity: 1; }
+
+    .vis-panel {
+      padding-top: 0.5rem;
+    }
+
+    .vis-prompt {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .vis-prompt.hidden {
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      overflow: hidden;
+      transform: translateY(-8px);
+    }
+
+    .vis-prompt-icon {
+      width: 48px; height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+    .vis-prompt-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; }
+    .vis-prompt h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 400; color: var(--white);
+    }
+    .vis-prompt p { font-size: 0.85rem; color: #a09890; line-height: 1.8; max-width: 300px; }
+
+    .vis-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      opacity: 0;
+      transition: opacity 0.35s, transform 0.35s;
+      transform: translateY(14px);
+      pointer-events: none;
+      height: 0;
+      overflow: hidden;
+    }
+    .vis-info.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+      height: auto;
+      overflow: visible;
+    }
+
+    .vis-zone-tag {
+      font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500;
+    }
+    .vis-zone-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 400; color: var(--white); line-height: 1.1;
+      margin-top: 0.2rem;
+    }
+    .vis-zone-desc {
+      font-size: 0.88rem; color: #c0b8ae; line-height: 1.85;
+    }
+
+    .vis-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .vis-tag {
+      padding: 0.3rem 0.85rem;
+      border: 1px solid var(--border);
+      font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+    }
+
+    .vis-styles-label {
+      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gray); font-weight: 500; margin-bottom: 0.5rem;
+    }
+    .vis-style-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .vis-style-pill {
+      padding: 0.3rem 0.8rem;
+      background: rgba(201,168,92,0.07);
+      border: 1px solid rgba(201,168,92,0.15);
+      font-size: 0.72rem; color: #c0b8ae; letter-spacing: 0.06em;
+    }
+
+    .vis-book-nudge { display: flex; align-items: center; gap: 1rem; padding-top: 0.3rem; }
+    .vis-book-nudge a {
+      font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: border-color 0.3s;
+    }
+    .vis-book-nudge a:hover { border-color: var(--gold); }
+    .vis-book-nudge span { font-size: 0.7rem; color: var(--gray); }
+
+    .vis-reset {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.4rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c0b8ae;
+      cursor: none;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+      margin-top: 0.5rem;
+      width: fit-content;
+    }
+    .vis-reset:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,92,0.05);
+    }
+
+    @media (max-width: 768px) {
+      .vis-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .vis-body-svg { max-width: 200px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ink Trail Canvas -->
+  <canvas id="inkCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9997;"></canvas>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Nav -->
+  <nav id="mainNav">
+    <a href="#hero" class="logo">
+      <div class="logo-inner">
+        <svg class="logo-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 163.39 153.19" fill="white"><g><path d="M60.62,137.61c-12.48,11.7-25.68,20.47-38.34,25.68L45.51,137A73.53,73.53,0,0,1,60.62,137.61Z" transform="translate(-20.88 -14.21)"/><path d="M171.85,133a91.28,91.28,0,0,0-18.17-4.82l-30-34-.68-.78a24.86,24.86,0,0,0,5.18-22.43h0A24.82,24.82,0,0,0,104.1,52.33a24.53,24.53,0,0,0-7.89,1.29A24.85,24.85,0,0,0,80.73,68.74a24.81,24.81,0,0,0,3.9,23.87l-.69.78L53.61,127.78a91.2,91.2,0,0,0-18.15,4.8,92.59,92.59,0,0,0-14.58,7c1.17-.45,2.35-.88,3.55-1.29a90.21,90.21,0,0,1,24.15-4.79,73.9,73.9,0,0,1,15.59.71c14.59,2.25,26.42,9,32.17,19.39a29,29,0,0,1,2.14,4.79,30.1,30.1,0,0,1,1.6,9h8.18a30.1,30.1,0,0,1,1.6-9,29.36,29.36,0,0,1,1.49-3.56c5.4-10.92,17.34-18.09,32.22-20.53a73.12,73.12,0,0,1,14.74-.87,89.18,89.18,0,0,1,24.37,4.45A92.75,92.75,0,0,0,171.85,133Zm-68,7.47c-7.37-7.92-19.13-12.63-32.78-13.52a191.32,191.32,0,0,0,14.12-17.77q3.3-4.68,6.22-9.44c.19-.28.36-.57.54-.86a179.06,179.06,0,0,0,10-18.61h3.83A180.25,180.25,0,0,0,115.84,99.1c.17.29.35.58.54.86q2.85,4.64,6.07,9.2a190.64,190.64,0,0,0,14.44,18.12C123.2,128.05,111.36,132.64,103.85,140.45Z" transform="translate(-20.88 -14.21)"/><path d="M93.57,48.44c-3.23-1.07-8.19-5.46-12.7-11.52S73.68,25,73.51,21.61c3.23,1.07,8.19,5.47,12.7,11.53S93.39,45,93.57,48.44Z" transform="translate(-20.88 -14.21)"/><path d="M184.27,162.84c-12.4-5.3-25.29-14-37.48-25.45a73.21,73.21,0,0,1,14.29-.84Z" transform="translate(-20.88 -14.21)"/><path d="M133.79,22c-.18,3.43-2.92,9.34-7.36,15.29S117,47.77,113.74,48.83c.18-3.43,2.92-9.34,7.36-15.29S130.57,23.09,133.79,22Z" transform="translate(-20.88 -14.21)"/><path d="M107.37,30.89c0,7.55-1.37,14-3.32,16.82-1.9-2.86-3.22-9.24-3.22-16.67s1.37-14,3.32-16.83C106.05,17.07,107.37,23.46,107.37,30.89Z" transform="translate(-20.88 -14.21)"/></g></svg>
+        <div class="logo-text-wrap">
+          <span class="logo-name">Abs<span class="logo-art">Art</span><span class="logo-tattoos">Tattoos</span></span>
+          <span class="logo-slogan">It is a way of life</span>
+        </div>
+      </div>
+    </a>
+    <ul class="nav-links" id="desktopNav">
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#visualiser">Placement</a></li>
+      <li><a href="#moodboard">Direction</a></li>
+      <li><a href="#stylequiz">Quiz</a></li>
+      <li><a href="#aftercare">Aftercare</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#location">Visit</a></li>
+      <li><a href="#booking" class="nav-book-cta">Book</a></li>
+    </ul>
+  </nav>
+
+  <!-- Mobile bottom tab bar -->
+  <div class="mob-bar" id="mobBar">
+    <div class="mob-bar-inner">
+
+      <!-- Work — leftmost -->
+      <a href="#portfolio" class="mob-tab" data-section="portfolio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="3" y="3" width="7" height="7" rx="0.5"/><rect x="14" y="3" width="7" height="7" rx="0.5"/>
+          <rect x="3" y="14" width="7" height="7" rx="0.5"/><rect x="14" y="14" width="7" height="7" rx="0.5"/>
+        </svg>
+        Work
+      </a>
+
+      <!-- Explore — eye icon -->
+      <a href="#visualiser" class="mob-tab" data-section="visualiser">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        Explore
+      </a>
+
+      <!-- Book — bold, gold, centre -->
+      <a href="#booking" class="mob-tab mob-tab-book" data-section="booking">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        </svg>
+        Book
+      </a>
+
+      <!-- Visit — map pin -->
+      <a href="#location" class="mob-tab" data-section="location">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Visit
+      </a>
+
+      <!-- More — rightmost -->
+      <button class="mob-tab" id="mobMoreBtn" onclick="toggleMobMore()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+          <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+          <circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+        More
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Mobile more drawer -->
+  <div class="mob-more-drawer" id="mobMoreDrawer">
+    <a href="#moodboard" class="mob-more-link" onclick="closeMobMore()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+      </svg>
+      Direction
+    </a>
+    <a href="#stylequiz" class="mob-more-link" onclick="closeMobMore()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      Style Quiz
+    </a>
+    <a href="#aftercare" class="mob-more-link" onclick="closeMobMore()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+      </svg>
+      Care
+    </a>
+    <a href="#about" class="mob-more-link" onclick="closeMobMore()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      About
+    </a>
+  </div>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-bg-text">ABS</div>
+    <div class="hero-line"></div>
+    <p class="hero-tag">Fine Art on Skin</p>
+    <h1>Where art<br>meets <em>skin.</em></h1>
+    <p class="hero-sub">Bespoke tattoo artistry. Every piece is designed for you — considered, intentional, permanent.</p>
+    <div class="hero-cta">
+      <a href="#booking" class="btn-primary">Book a Session</a>
+      <a href="#portfolio" class="btn-ghost">View Work</a>
+    </div>
+    <p class="hero-scroll">Scroll</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <div class="portfolio-intro reveal">
+      <p class="section-label">Portfolio</p>
+      <h2>The <em>work</em></h2>
+      <p>Each tattoo is a collaboration — a piece built from your vision and refined through artistry. Browse a selection of completed works below.</p>
+    </div>
+
+    <!-- Peek slider -->
+    <div class="pf-slider-wrap" id="pfWrap">
+
+      <!-- Left arrow -->
+      <button class="pf-arrow pf-arrow-prev" id="pfPrev" onclick="pfMove(-1)" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <!-- Track -->
+      <div class="pf-track" id="pfTrack">
+        <!-- Slide 1 -->
+        <div class="pf-slide active">
+          <!-- Replace with: <img src="your-image.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+          <div class="portfolio-placeholder">
+            <div class="ph-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <span>Your photo here</span>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="pf-slide">
+          <div class="portfolio-placeholder">
+            <div class="ph-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <span>Your photo here</span>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="pf-slide">
+          <div class="portfolio-placeholder">
+            <div class="ph-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <span>Your photo here</span>
+          </div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="pf-slide">
+          <div class="portfolio-placeholder">
+            <div class="ph-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <span>Your photo here</span>
+          </div>
+        </div>
+        <!-- Slide 5 -->
+        <div class="pf-slide">
+          <div class="portfolio-placeholder">
+            <div class="ph-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <span>Your photo here</span>
+          </div>
+        </div>
+        <!-- Slide 6 -->
+        <div class="pf-slide">
+          <div class="portfolio-placeholder">
+            <div class="ph-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <span>Your photo here</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right arrow -->
+      <button class="pf-arrow pf-arrow-next" id="pfNext" onclick="pfMove(1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Progress bar (auto-advance timer) -->
+    <div class="pf-progress-wrap"><div class="pf-progress-bar" id="pfProgress"></div></div>
+
+    <!-- Dots -->
+    <div class="pf-dots" id="pfDots"></div>
+
+    <p class="portfolio-note reveal">→ Replace placeholders with your own images. See comments in code for instructions.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Placement Visualiser -->
+  <section id="visualiser">
+    <div class="reveal">
+      <p class="section-label">Placement</p>
+      <h2>Where will it <em>live?</em></h2>
+    </div>
+    <div class="vis-layout reveal">
+
+      <!-- Body figure with front/back toggle -->
+      <div>
+        <!-- Toggle -->
+        <div class="vis-toggle">
+          <button class="vis-toggle-btn active" id="btnFront" onclick="switchView('front')">Front</button>
+          <button class="vis-toggle-btn" id="btnBack" onclick="switchView('back')">Back</button>
+        </div>
+
+        <div class="vis-body-wrap" id="visBodyWrap">
+          <div class="vis-dot" id="visDot"></div>
+
+          <!-- FRONT VIEW -->
+          <svg id="svgFront" class="vis-body-svg" viewBox="0 0 200 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#6b5f52" stroke-width="1.8" fill="none">
+              <ellipse cx="100" cy="36" rx="22" ry="26"/>
+              <line x1="90" y1="60" x2="86" y2="76"/>
+              <line x1="110" y1="60" x2="114" y2="76"/>
+              <path d="M86 76 Q60 82 52 100 L48 160 Q48 170 56 172 L70 174"/>
+              <path d="M114 76 Q140 82 148 100 L152 160 Q152 170 144 172 L130 174"/>
+              <line x1="70" y1="174" x2="130" y2="174"/>
+              <line x1="100" y1="80" x2="100" y2="174" stroke-dasharray="2 4" stroke="#4a3f35"/>
+              <path d="M70 174 Q68 196 72 210 L128 210 Q132 196 130 174"/>
+              <path d="M72 210 Q58 218 56 232 L60 280"/>
+              <path d="M128 210 Q142 218 144 232 L140 280"/>
+              <path d="M60 280 Q54 330 56 380 L60 460 Q62 470 66 472 L74 472 Q78 470 78 460 L76 380"/>
+              <path d="M140 280 Q146 330 144 380 L140 460 Q138 470 134 472 L126 472 Q122 470 122 460 L124 380"/>
+              <path d="M60 280 Q100 296 140 280"/>
+              <path d="M52 100 Q38 120 34 150 L30 200 Q28 210 32 216 L38 218"/>
+              <path d="M38 218 Q36 260 38 300 L40 320 Q42 326 46 326 L50 326 Q54 326 56 320 L58 300"/>
+              <path d="M148 100 Q162 120 166 150 L170 200 Q172 210 168 216 L162 218"/>
+              <path d="M162 218 Q164 260 162 300 L160 320 Q158 326 154 326 L150 326 Q146 326 144 320 L142 300"/>
+              <path d="M60 472 Q54 476 52 480 L54 484 Q60 488 70 486 L74 472"/>
+              <path d="M140 472 Q146 476 148 480 L146 484 Q140 488 130 486 L126 472"/>
+            </g>
+            <ellipse class="vis-zone" data-zone="head" cx="100" cy="36" rx="28" ry="32"/>
+            <rect class="vis-zone" data-zone="neck" x="84" y="58" width="32" height="20" rx="4"/>
+            <path class="vis-zone" data-zone="chest" d="M72 80 Q100 76 128 80 L132 140 Q100 148 68 140 Z"/>
+            <path class="vis-zone" data-zone="upperarm" d="M30 100 Q52 90 56 130 L42 160 Q24 144 26 118 Z"/>
+            <path class="vis-zone" data-zone="upperarm" d="M170 100 Q148 90 144 130 L158 160 Q176 144 174 118 Z"/>
+            <path class="vis-zone" data-zone="forearm" d="M28 192 L42 186 L58 300 L44 308 Z"/>
+            <path class="vis-zone" data-zone="forearm" d="M172 192 L158 186 L142 300 L156 308 Z"/>
+            <path class="vis-zone" data-zone="ribs" d="M52 120 L70 118 L72 172 L56 172 Z"/>
+            <path class="vis-zone" data-zone="ribs" d="M148 120 L130 118 L128 172 L144 172 Z"/>
+            <path class="vis-zone" data-zone="abdomen" d="M70 148 Q100 156 130 148 L128 210 Q100 218 72 210 Z"/>
+            <path class="vis-zone" data-zone="hip" d="M58 210 Q100 224 142 210 L144 248 Q100 260 56 248 Z"/>
+            <path class="vis-zone" data-zone="thigh" d="M56 256 Q78 248 80 320 L64 328 Q52 310 52 280 Z"/>
+            <path class="vis-zone" data-zone="thigh" d="M144 256 Q122 248 120 320 L136 328 Q148 310 148 280 Z"/>
+            <path class="vis-zone" data-zone="calf" d="M56 340 L76 334 L78 420 L58 426 Z"/>
+            <path class="vis-zone" data-zone="calf" d="M144 340 L124 334 L122 420 L142 426 Z"/>
+            <path class="vis-zone" data-zone="ankle" d="M54 432 L78 428 L74 480 L50 476 Z"/>
+            <path class="vis-zone" data-zone="ankle" d="M146 432 L122 428 L126 480 L150 476 Z"/>
+          </svg>
+
+          <!-- BACK VIEW -->
+          <svg id="svgBack" class="vis-body-svg" viewBox="0 0 200 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+            <g stroke="#6b5f52" stroke-width="1.8" fill="none">
+              <!-- Head (back) -->
+              <ellipse cx="100" cy="36" rx="22" ry="26"/>
+              <!-- Neck -->
+              <line x1="90" y1="60" x2="87" y2="76"/>
+              <line x1="110" y1="60" x2="113" y2="76"/>
+              <!-- Shoulders & back torso -->
+              <path d="M87 76 Q60 80 50 98 L46 162 Q46 172 56 174 L70 176"/>
+              <path d="M113 76 Q140 80 150 98 L154 162 Q154 172 144 174 L130 176"/>
+              <line x1="70" y1="176" x2="130" y2="176"/>
+              <!-- Spine line -->
+              <line x1="100" y1="76" x2="100" y2="210" stroke-dasharray="2 4" stroke="#4a3f35"/>
+              <!-- Shoulder blade hints -->
+              <path d="M72 98 Q82 110 78 136 Q70 138 64 128 Q60 114 68 102 Z" stroke="#5a4f45"/>
+              <path d="M128 98 Q118 110 122 136 Q130 138 136 128 Q140 114 132 102 Z" stroke="#5a4f45"/>
+              <!-- Lower back -->
+              <path d="M70 176 Q68 198 72 212 L128 212 Q132 198 130 176"/>
+              <!-- Glutes -->
+              <path d="M72 212 Q58 220 56 234 L60 282"/>
+              <path d="M128 212 Q142 220 144 234 L140 282"/>
+              <path d="M60 282 Q80 270 100 274 Q120 270 140 282"/>
+              <!-- Legs back -->
+              <path d="M60 282 Q54 332 56 382 L60 462 Q62 472 66 474 L74 474 Q78 472 78 462 L76 382"/>
+              <path d="M140 282 Q146 332 144 382 L140 462 Q138 472 134 474 L126 474 Q122 472 122 462 L124 382"/>
+              <!-- Arms back -->
+              <path d="M50 98 Q36 118 32 150 L28 202 Q26 212 30 218 L36 220"/>
+              <path d="M36 220 Q34 262 36 302 L38 322 Q40 328 44 328 L48 328 Q52 328 54 322 L56 302"/>
+              <path d="M150 98 Q164 118 168 150 L172 202 Q174 212 170 218 L164 220"/>
+              <path d="M164 220 Q166 262 164 302 L162 322 Q160 328 156 328 L152 328 Q148 328 146 322 L144 302"/>
+              <!-- Heels -->
+              <path d="M60 474 Q56 478 54 484 L58 488 Q64 490 72 488 L74 474"/>
+              <path d="M140 474 Q144 478 146 484 L142 488 Q136 490 128 488 L126 474"/>
+            </g>
+
+            <!-- Back clickable zones -->
+            <!-- Head back -->
+            <ellipse class="vis-zone" data-zone="head" cx="100" cy="36" rx="28" ry="32"/>
+            <!-- Neck back -->
+            <rect class="vis-zone" data-zone="neck_back" x="84" y="58" width="32" height="20" rx="4"/>
+            <!-- Upper back / shoulder blades -->
+            <path class="vis-zone" data-zone="upperback" d="M60 80 Q100 74 140 80 L136 160 Q100 168 64 160 Z"/>
+            <!-- Left shoulder -->
+            <path class="vis-zone" data-zone="shoulder" d="M28 94 Q50 86 56 126 L40 156 Q22 140 24 114 Z"/>
+            <!-- Right shoulder -->
+            <path class="vis-zone" data-zone="shoulder" d="M172 94 Q150 86 144 126 L160 156 Q178 140 176 114 Z"/>
+            <!-- Tricep / back upper arm -->
+            <path class="vis-zone" data-zone="tricep" d="M26 148 L40 140 L56 280 L42 288 Z"/>
+            <path class="vis-zone" data-zone="tricep" d="M174 148 L160 140 L144 280 L158 288 Z"/>
+            <!-- Lower back -->
+            <path class="vis-zone" data-zone="lowerback" d="M64 164 Q100 174 136 164 L134 214 Q100 224 66 214 Z"/>
+            <!-- Glutes -->
+            <path class="vis-zone" data-zone="glutes" d="M58 218 Q100 208 142 218 L144 272 Q100 286 56 272 Z"/>
+            <!-- Back of thigh (hamstring) -->
+            <path class="vis-zone" data-zone="hamstring" d="M56 278 Q78 268 80 352 L62 360 Q50 340 50 308 Z"/>
+            <path class="vis-zone" data-zone="hamstring" d="M144 278 Q122 268 120 352 L138 360 Q150 340 150 308 Z"/>
+            <!-- Calf back -->
+            <path class="vis-zone" data-zone="calf" d="M56 366 L76 360 L78 448 L58 454 Z"/>
+            <path class="vis-zone" data-zone="calf" d="M144 366 L124 360 L122 448 L142 454 Z"/>
+            <!-- Ankle back -->
+            <path class="vis-zone" data-zone="ankle" d="M54 456 L78 452 L74 486 L50 482 Z"/>
+            <path class="vis-zone" data-zone="ankle" d="M146 456 L122 452 L126 486 L150 482 Z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Info panel -->
+      <div class="vis-panel" id="visPanel">
+        <div class="vis-prompt" id="visPrompt">
+          <div class="vis-prompt-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2C8 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-4-8-8-8z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </div>
+          <h3>Tap a zone<br>on the body</h3>
+          <p>Toggle front / back, then hover or tap any area to explore placement ideas, pain level, and which styles work best there.</p>
+        </div>
+
+        <div class="vis-info" id="visInfo">
+          <div>
+            <div class="vis-zone-tag" id="visTag"></div>
+            <div class="vis-zone-title" id="visTitle"></div>
+          </div>
+          <div class="vis-zone-desc" id="visDesc"></div>
+          <div class="vis-tags" id="visTags"></div>
+          <div>
+            <div class="vis-styles-label">Works well with</div>
+            <div class="vis-style-pills" id="visStyles"></div>
+          </div>
+          <div class="vis-book-nudge">
+            <a href="#booking">Book this placement →</a>
+            <span>via WhatsApp</span>
+          </div>
+          <button class="vis-reset" id="visReset">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            Explore another zone
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Mood Board -->
+  <section id="moodboard">
+    <div class="reveal">
+      <p class="section-label">Mood Board</p>
+      <h2>Find your tattoo <em>direction</em></h2>
+    </div>
+    <div class="mb-layout">
+
+      <!-- Left: Selectors -->
+      <div class="reveal">
+
+        <!-- Step 1: Style -->
+        <div class="mb-step">
+          <div class="mb-step-label">
+            <span class="mb-step-num">1</span>
+            Pick your style
+          </div>
+          <div class="mb-chips" data-group="style">
+            <button class="mb-chip" data-value="Fine Line"><span>Fine Line</span></button>
+            <button class="mb-chip" data-value="Blackwork"><span>Blackwork</span></button>
+            <button class="mb-chip" data-value="Geometric"><span>Geometric</span></button>
+            <button class="mb-chip" data-value="Neo-Traditional"><span>Neo-Traditional</span></button>
+            <button class="mb-chip" data-value="Illustrative"><span>Illustrative</span></button>
+            <button class="mb-chip" data-value="Minimalist"><span>Minimalist</span></button>
+            <button class="mb-chip" data-value="Ornamental"><span>Ornamental</span></button>
+            <button class="mb-chip" data-value="Abstract"><span>Abstract</span></button>
+          </div>
+        </div>
+
+        <!-- Step 2: Vibe -->
+        <div class="mb-step">
+          <div class="mb-step-label">
+            <span class="mb-step-num">2</span>
+            Choose a vibe
+          </div>
+          <div class="mb-chips" data-group="vibe">
+            <button class="mb-chip" data-value="Dark & Moody"><span>Dark &amp; Moody</span></button>
+            <button class="mb-chip" data-value="Soft & Ethereal"><span>Soft &amp; Ethereal</span></button>
+            <button class="mb-chip" data-value="Bold & Powerful"><span>Bold &amp; Powerful</span></button>
+            <button class="mb-chip" data-value="Nature & Organic"><span>Nature &amp; Organic</span></button>
+            <button class="mb-chip" data-value="Sacred & Spiritual"><span>Sacred &amp; Spiritual</span></button>
+            <button class="mb-chip" data-value="Witty & Playful"><span>Witty &amp; Playful</span></button>
+            <button class="mb-chip" data-value="Raw & Edgy"><span>Raw &amp; Edgy</span></button>
+            <button class="mb-chip" data-value="Elegant & Refined"><span>Elegant &amp; Refined</span></button>
+          </div>
+        </div>
+
+        <!-- Step 3: Size -->
+        <div class="mb-step">
+          <div class="mb-step-label">
+            <span class="mb-step-num">3</span>
+            How big?
+          </div>
+          <div class="mb-chips" data-group="size">
+            <button class="mb-chip" data-value="Tiny & Delicate (coin-sized)"><span>Tiny &amp; Delicate</span></button>
+            <button class="mb-chip" data-value="Medium (palm-sized)"><span>Medium</span></button>
+            <button class="mb-chip" data-value="Large Statement Piece"><span>Large Statement</span></button>
+            <button class="mb-chip" data-value="Full Sleeve or Back Piece"><span>Sleeve / Back Piece</span></button>
+          </div>
+        </div>
+
+        <button class="mb-generate-btn" id="mbGenerateBtn" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+          </svg>
+          <span>Generate my direction</span>
+        </button>
+
+      </div>
+
+      <!-- Right: Result -->
+      <div class="mb-result" id="mbResult">
+        <div class="mb-result-card">
+          <!-- Loading state -->
+          <div class="mb-result-loading" id="mbLoading" style="display:none;">
+            <div class="mb-spinner"></div>
+            <span class="mb-loading-text">Crafting your direction...</span>
+          </div>
+          <!-- Content state -->
+          <div class="mb-result-content" id="mbContent">
+            <div class="mb-selection-summary" id="mbSelSummary"></div>
+            <div class="mb-direction-label">Your Tattoo Direction</div>
+            <div class="mb-direction-title" id="mbTitle"></div>
+            <div class="mb-direction-body" id="mbBody"></div>
+            <div class="mb-suggestions" id="mbSuggestions"></div>
+            <div class="mb-cta-row">
+              <a href="#booking" class="mb-book-link">Book a consultation →</a>
+              <button class="mb-redo" id="mbRedo">↺ Try again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <div class="divider"></div>
+
+  <!-- Style Quiz -->
+  <section id="stylequiz">
+    <div class="reveal">
+      <p class="section-label">Style Quiz</p>
+      <h2>What's your tattoo <em>personality?</em></h2>
+    </div>
+    <div class="sq-wrap reveal">
+      <div class="sq-progress-wrap">
+        <div class="sq-progress-bar" id="sqProgressBar"></div>
+      </div>
+      <div class="sq-progress-label" id="sqProgressLabel">Question 1 of 5</div>
+      <div class="sq-questions" id="sqQuestions"></div>
+      <div class="sq-result" id="sqResult">
+        <div class="sq-result-inner">
+          <div class="sq-result-eyebrow">Your Tattoo Personality</div>
+          <div class="sq-result-title" id="sqResultTitle"></div>
+          <div class="sq-result-desc" id="sqResultDesc"></div>
+          <div class="sq-result-traits" id="sqResultTraits"></div>
+          <div class="sq-result-actions">
+            <a href="#booking" class="btn-primary" style="display:inline-block;text-align:center;">Book a session →</a>
+            <button class="sq-retake" id="sqRetake">↺ Retake quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  <div class="divider"></div>
+
+  <!-- Booking -->
+  <section id="booking">
+    <div class="booking-layout">
+      <div class="booking-info reveal">
+        <p class="section-label">Booking</p>
+        <h2>Let's create<br><em>something</em> together</h2>
+        <p>All bookings are handled personally over WhatsApp. No forms, no data stored — just a direct conversation about your vision.</p>
+        <p>I take a limited number of appointments each month to ensure every piece gets the full attention it deserves.</p>
+        <div class="booking-steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div class="step-text">
+              <h4>Send your idea</h4>
+              <p>Message me with your concept, placement, size, and any reference images you have in mind.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div class="step-text">
+              <h4>Design consultation</h4>
+              <p>We'll refine the idea together. I'll share sketches and we'll align on the final design before your session.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div class="step-text">
+              <h4>Confirm your date</h4>
+              <p>Once the design is approved, we'll lock in your session date with a small deposit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-action reveal">
+        <!-- Replace YOUR_WHATSAPP_NUMBER with your actual number including country code e.g. 919876543210 -->
+        <a href="https://wa.me/YOUR_WHATSAPP_NUMBER?text=Hi%2C%20I%27d%20like%20to%20book%20a%20tattoo%20session%20at%20AbsArt%20Tattoos." class="whatsapp-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          <div class="whatsapp-btn-text">
+            <strong>Book via WhatsApp</strong>
+            <span>Tap to open a conversation</span>
+          </div>
+        </a>
+
+        <!-- QR Code + Phone Number -->
+        <div class="booking-contact-row">
+          <div class="qr-block">
+            <div class="qr-frame">
+              <!-- QR code generated via JS below for the WhatsApp link -->
+              <canvas id="qrCanvas" width="78" height="78"></canvas>
+            </div>
+            <span class="qr-label">Scan to chat</span>
+          </div>
+          <div class="contact-divider"></div>
+          <div class="phone-block">
+            <span class="phone-label">Call or WhatsApp</span>
+            <!-- Replace with your actual number -->
+            <span class="phone-number">+91 XXXXX XXXXX</span>
+            <span class="phone-hint">Available Mon–Fri, 4pm – 11pm</span>
+          </div>
+        </div>
+
+        <p class="privacy-note">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Your privacy matters. No data is stored on this site. All communication happens directly through WhatsApp between us.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Aftercare -->
+  <section id="aftercare">
+    <div class="reveal">
+      <p class="section-label">Aftercare</p>
+      <h2>Protect your <em>investment</em></h2>
+    </div>
+    <div class="aftercare-grid reveal">
+      <div class="care-card">
+        <div class="care-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12s1 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <h3>Keep it clean</h3>
+        <p>Gently wash your tattoo 2–3 times a day with lukewarm water and a fragrance-free, antibacterial soap. Pat dry with a clean paper towel — never rub.</p>
+      </div>
+      <div class="care-card">
+        <div class="care-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>Let it breathe</h3>
+        <p>Remove the initial wrap after 2–4 hours. If a second-skin bandage was applied, leave it on for 3–5 days. Avoid re-wrapping unless advised.</p>
+      </div>
+      <div class="care-card">
+        <div class="care-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h3>Moisturise daily</h3>
+        <p>Apply a thin layer of unscented moisturiser (Bepanthen or a fragrance-free lotion) 2–3 times a day. Don't over-apply — a little goes a long way.</p>
+      </div>
+      <div class="care-card">
+        <div class="care-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <h3>Avoid the sun</h3>
+        <p>Keep your new tattoo out of direct sunlight for at least 4 weeks. Once healed, always apply SPF 50+ to protect the colour and detail long-term.</p>
+      </div>
+      <div class="care-card">
+        <div class="care-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.2"><path d="M2 12h20M12 2c0 0-7 5-7 10s7 10 7 10 7-5 7-10S12 2 12 2z"/></svg>
+        </div>
+        <h3>No swimming</h3>
+        <p>Avoid pools, the sea, and hot tubs for at least 3–4 weeks. Prolonged water exposure can draw out ink and cause infection before the skin has fully healed.</p>
+      </div>
+      <div class="care-card">
+        <div class="care-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3>Don't pick or scratch</h3>
+        <p>Peeling and itching are normal. Picking or scratching can pull out ink and cause scarring. If it itches badly, gently tap — never scratch.</p>
+      </div>
+    </div>
+
+    <div class="aftercare-timeline reveal">
+      <p class="timeline-heading">Healing timeline</p>
+      <div class="timeline-items">
+        <div class="timeline-item">
+          <div class="timeline-day">Days 1–3</div>
+          <p>Redness, swelling, and some oozing is normal. Clean gently and keep moist. This is the most sensitive phase.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Days 4–7</div>
+          <p>Peeling begins. The outer skin starts to shed. Keep moisturising and resist the urge to pick.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Week 2–3</div>
+          <p>The surface appears healed but deeper layers are still recovering. Continue care and sun avoidance.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-day">Month 1–2</div>
+          <p>Full healing is complete. The tattoo settles, colours become true. Time to show it off.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about-layout">
+      <div class="about-image reveal">
+        <div class="about-gold-bar"></div>
+        <!-- Replace with your actual photo: <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+        <div class="about-image-inner">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>
+          <span>Your photo here</span>
+        </div>
+      </div>
+      <div class="about-content reveal">
+        <p class="section-label">About</p>
+        <h2>The artist<br>behind <em>AbsArt</em></h2>
+        <p>I'm a tattoo artist with a deep passion for creating art that lives with you. Every piece I create is approached with the care and intention of a fine artist — not a printer.</p>
+        <p>My work is rooted in the belief that a tattoo should be as unique as the person wearing it. I specialise in custom designs, working closely with each client to bring their vision to life in a way that feels truly personal.</p>
+        <p>I take limited bookings each month. Not because of demand — but because every piece deserves my full attention and energy.</p>
+        <!-- Edit these numbers to match yours -->
+        <div class="about-stats">
+          <div>
+            <div class="stat-num">6+</div>
+            <div class="stat-label">Years of craft</div>
+          </div>
+          <div>
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Tattoos done</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Custom work</div>
+          </div>
+        </div>
+
+        <!-- Instagram -->
+        <div class="about-social">
+          <div class="insta-qr-block">
+            <div class="insta-qr-frame">
+              <!-- QR generated via JS pointing to Instagram profile -->
+              <canvas id="instaQrCanvas" width="70" height="70"></canvas>
+            </div>
+            <span class="insta-qr-label">Scan to follow</span>
+          </div>
+          <div style="width:1px;height:60px;background:var(--border);flex-shrink:0;"></div>
+          <div class="insta-info">
+            <span class="insta-handle-label">Follow on Instagram</span>
+            <!-- Replace YOUR_INSTAGRAM with your actual handle -->
+            <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener" class="insta-handle-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="var(--gold)" stroke="none"/>
+              </svg>
+              <span class="insta-handle-name">@absarttattoos</span>
+            </a>
+            <span class="insta-hint">Portfolio updates &amp; behind the scenes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="testi-intro reveal">
+      <p class="section-label">Testimonials</p>
+      <h2>What clients <em>say</em></h2>
+      <p>Every review is a relationship. Here's what people said after their experience at AbsArt.</p>
+    </div>
+
+    <div class="testi-track-wrap reveal">
+      <div class="testi-track" id="testiTrack">
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I came in with a rough idea and left with something I couldn't have imagined on my own. The design process was collaborative, thoughtful, and genuinely exciting. Best tattoo experience I've had."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">R</div>
+            <div>
+              <div class="testi-name">Riya M.</div>
+              <div class="testi-detail">Fine line floral · Upper arm</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The attention to detail is unreal. Three months later and the lines are still crisp. If you want someone who treats every piece like it's going in a museum, this is the studio."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">K</div>
+            <div>
+              <div class="testi-name">Karan S.</div>
+              <div class="testi-detail">Geometric blackwork · Chest</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I was nervous — it was my first tattoo. The whole process was explained clearly, the studio felt calm and clean, and the result made me cry (in the best way). Already planning my second."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">A</div>
+            <div>
+              <div class="testi-name">Aanya P.</div>
+              <div class="testi-detail">Minimalist script · Wrist</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Booked over WhatsApp — it was smooth and personal, not like filling in some online form. The consultation felt like talking to a friend who happened to be an incredible artist."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">D</div>
+            <div>
+              <div class="testi-name">Dev R.</div>
+              <div class="testi-detail">Neo-traditional · Forearm</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Came for a cover-up I was embarrassed about. Left with something I'm genuinely proud to show off. The skill involved in making the old piece completely disappear is insane."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">N</div>
+            <div>
+              <div class="testi-name">Neha T.</div>
+              <div class="testi-detail">Cover-up · Shoulder</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I've been to five tattoo studios across the country. This is the only one where I felt the artist was as invested in the outcome as I was. The aftercare advice alone was worth it."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div>
+              <div class="testi-name">Sahil V.</div>
+              <div class="testi-detail">Full back piece · Multiple sessions</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="testi-nav">
+      <button class="testi-btn" id="testiBtnPrev" onclick="testiMove(-1)" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="testi-btn" id="testiBtnNext" onclick="testiMove(1)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="testi-dots" id="testiDots"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Location -->
+  <section id="location">
+    <div class="reveal">
+      <p class="section-label">Visit</p>
+      <h2>Come find <em>us</em></h2>
+    </div>
+    <div class="location-layout">
+      <div class="location-info reveal">
+        <div class="location-detail">
+          <div class="location-detail-label">Studio Address</div>
+          <!-- Replace with your actual address -->
+          <p>123 Your Street Name<br>Your City, State — 000000</p>
+        </div>
+        <div class="location-detail">
+          <div class="location-detail-label">Studio Hours</div>
+          <div class="hours-grid">
+            <div class="hour-row"><span>Monday – Friday</span><span>16:00 – 23:00</span></div>
+            <div class="hour-row closed"><span>Saturday</span><span>By appointment</span></div>
+            <div class="hour-row closed"><span>Sunday</span><span>By appointment</span></div>
+          </div>
+        </div>
+        <div class="location-detail">
+          <div class="location-detail-label">Contact</div>
+          <!-- Replace with your WhatsApp number -->
+          <a href="https://wa.me/YOUR_WHATSAPP_NUMBER">WhatsApp — tap to message</a>
+        </div>
+        <div class="location-detail">
+          <div class="location-detail-label">Follow</div>
+          <!-- Replace with your Instagram handle -->
+          <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener">@absarttattoos</a>
+        </div>
+        <a href="https://maps.google.com/?q=YOUR_ADDRESS" target="_blank" rel="noopener" class="btn-ghost" style="display:inline-block; margin-top:1rem;">Get Directions →</a>
+      </div>
+
+      <div class="map-placeholder reveal">
+        <!-- Replace this entire block with a Google Maps embed if you want a real map -->
+        <!-- <iframe src="YOUR_GOOGLE_MAPS_EMBED_URL" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
+        <div class="map-pin"></div>
+        <p class="map-address">AbsArt Tattoos<br>Your City</p>
+        <a href="https://maps.google.com/?q=YOUR_ADDRESS" target="_blank" rel="noopener" class="map-cta">Open in Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <div style="display:flex;align-items:center;gap:0.65rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 163.39 153.19" fill="white" style="width:42px;height:39px;opacity:0.85;flex-shrink:0;"><g><path d="M60.62,137.61c-12.48,11.7-25.68,20.47-38.34,25.68L45.51,137A73.53,73.53,0,0,1,60.62,137.61Z" transform="translate(-20.88 -14.21)"/><path d="M171.85,133a91.28,91.28,0,0,0-18.17-4.82l-30-34-.68-.78a24.86,24.86,0,0,0,5.18-22.43h0A24.82,24.82,0,0,0,104.1,52.33a24.53,24.53,0,0,0-7.89,1.29A24.85,24.85,0,0,0,80.73,68.74a24.81,24.81,0,0,0,3.9,23.87l-.69.78L53.61,127.78a91.2,91.2,0,0,0-18.15,4.8,92.59,92.59,0,0,0-14.58,7c1.17-.45,2.35-.88,3.55-1.29a90.21,90.21,0,0,1,24.15-4.79,73.9,73.9,0,0,1,15.59.71c14.59,2.25,26.42,9,32.17,19.39a29,29,0,0,1,2.14,4.79,30.1,30.1,0,0,1,1.6,9h8.18a30.1,30.1,0,0,1,1.6-9,29.36,29.36,0,0,1,1.49-3.56c5.4-10.92,17.34-18.09,32.22-20.53a73.12,73.12,0,0,1,14.74-.87,89.18,89.18,0,0,1,24.37,4.45A92.75,92.75,0,0,0,171.85,133Zm-68,7.47c-7.37-7.92-19.13-12.63-32.78-13.52a191.32,191.32,0,0,0,14.12-17.77q3.3-4.68,6.22-9.44c.19-.28.36-.57.54-.86a179.06,179.06,0,0,0,10-18.61h3.83A180.25,180.25,0,0,0,115.84,99.1c.17.29.35.58.54.86q2.85,4.64,6.07,9.2a190.64,190.64,0,0,0,14.44,18.12C123.2,128.05,111.36,132.64,103.85,140.45Z" transform="translate(-20.88 -14.21)"/><path d="M93.57,48.44c-3.23-1.07-8.19-5.46-12.7-11.52S73.68,25,73.51,21.61c3.23,1.07,8.19,5.47,12.7,11.53S93.39,45,93.57,48.44Z" transform="translate(-20.88 -14.21)"/><path d="M184.27,162.84c-12.4-5.3-25.29-14-37.48-25.45a73.21,73.21,0,0,1,14.29-.84Z" transform="translate(-20.88 -14.21)"/><path d="M133.79,22c-.18,3.43-2.92,9.34-7.36,15.29S117,47.77,113.74,48.83c.18-3.43,2.92-9.34,7.36-15.29S130.57,23.09,133.79,22Z" transform="translate(-20.88 -14.21)"/><path d="M107.37,30.89c0,7.55-1.37,14-3.32,16.82-1.9-2.86-3.22-9.24-3.22-16.67s1.37-14,3.32-16.83C106.05,17.07,107.37,23.46,107.37,30.89Z" transform="translate(-20.88 -14.21)"/></g></svg>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;">Abs<span style="color:var(--gold);">Art</span><span style="font-size:0.65em;color:#a09890;letter-spacing:0.28em;font-weight:300;margin-left:0.1em;">Tattoos</span></div>
+          <div style="font-size:0.5rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-top:0.2rem;">It is a way of life</div>
+        </div>
+      </div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#booking">Book</a></li>
+      <li><a href="#aftercare">Aftercare</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#location">Visit</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 AbsArt Tattoos</p>
+  </footer>
+
+  <!-- QR Code library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    // ── QR Code ───────────────────────────────────────────────────────────
+    // Replace YOUR_WHATSAPP_NUMBER below with your actual number e.g. 919876543210
+    const WA_NUMBER = 'YOUR_WHATSAPP_NUMBER';
+    const WA_URL = `https://wa.me/${WA_NUMBER}?text=Hi%2C%20I%27d%20like%20to%20book%20a%20tattoo%20session%20at%20AbsArt%20Tattoos.`;
+
+    // Also update the booking button href dynamically
+    document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+      btn.href = WA_URL;
+    });
+
+    // Generate QR into canvas
+    window.addEventListener('DOMContentLoaded', () => {
+
+      // ── WhatsApp QR ──────────────────────────────────────────────────────
+      const qrContainer = document.createElement('div');
+      new QRCode(qrContainer, {
+        text: WA_URL,
+        width: 78,
+        height: 78,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      const qrCanvas = document.getElementById('qrCanvas');
+      const waGenerated = qrContainer.querySelector('canvas');
+      if (waGenerated && qrCanvas) {
+        qrCanvas.getContext('2d').drawImage(waGenerated, 0, 0, 78, 78);
+      }
+
+      // ── Instagram QR ─────────────────────────────────────────────────────
+      // Replace YOUR_INSTAGRAM with your actual handle e.g. absarttattoos
+      const INSTA_HANDLE = 'YOUR_INSTAGRAM';
+      const INSTA_URL = `https://instagram.com/${INSTA_HANDLE}`;
+
+      // Also update all insta links dynamically
+      document.querySelectorAll('.insta-handle-link').forEach(a => {
+        a.href = INSTA_URL;
+      });
+      document.querySelectorAll('.insta-handle-name').forEach(el => {
+        el.textContent = `@${INSTA_HANDLE}`;
+      });
+
+      const instaContainer = document.createElement('div');
+      new QRCode(instaContainer, {
+        text: INSTA_URL,
+        width: 70,
+        height: 70,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      const instaCanvas = document.getElementById('instaQrCanvas');
+      const instaGenerated = instaContainer.querySelector('canvas');
+      if (instaGenerated && instaCanvas) {
+        instaCanvas.getContext('2d').drawImage(instaGenerated, 0, 0, 70, 70);
+      }
+
+    });
+  </script>
+
+  <script>
+    // ── Smooth Ink Trail ─────────────────────────────────────────────────
+    const canvas = document.getElementById('inkCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      // Preserve existing drawing on resize
+      const tmp = document.createElement('canvas');
+      tmp.width = canvas.width; tmp.height = canvas.height;
+      tmp.getContext('2d').drawImage(canvas, 0, 0);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      ctx.drawImage(tmp, 0, 0);
+    }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', resizeCanvas);
+
+    // ── State ─────────────────────────────────────────────────────────────
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let penX = targetX, penY = targetY;
+
+    // Each point has its own birth time — fades individually (original system)
+    let points = [];
+    const LERP     = 0.12;   // pen smoothing — lower = more lag
+    const MIN_DIST = 4;      // px before a new point is recorded
+    const LIFE     = 900;    // ms each point lives — fast vanish
+
+    // Dot cursor + ring
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', e => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      cursor.style.transform = `translate(${targetX - 4}px, ${targetY - 4}px)`;
+    });
+
+    // ── Catmull-Rom smooth draw through a window of points ────────────────
+    function drawSmooth(pts, getAlpha) {
+      if (pts.length < 2) return;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[Math.max(i - 1, 0)];
+        const p1 = pts[i];
+        const p2 = pts[i + 1];
+        const p3 = pts[Math.min(i + 2, pts.length - 1)];
+        const cp1x = p1.x + (p2.x - p0.x) / 6;
+        const cp1y = p1.y + (p2.y - p0.y) / 6;
+        const cp2x = p2.x - (p3.x - p1.x) / 6;
+        const cp2y = p2.y - (p3.y - p1.y) / 6;
+        // Alpha is the average of both endpoint ages
+        const alpha = (getAlpha(p1) + getAlpha(p2)) / 2;
+        if (alpha < 0.01) continue;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+        ctx.strokeStyle = `rgba(201, 168, 92, ${alpha})`;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+      }
+    }
+
+    // ── Main loop ─────────────────────────────────────────────────────────
+    function loop() {
+      const now = Date.now();
+
+      // Smooth pen follows cursor
+      penX += (targetX - penX) * LERP;
+      penY += (targetY - penY) * LERP;
+
+      // Record point if pen moved enough
+      const last = points[points.length - 1];
+      const dx = penX - (last ? last.x : penX + 999);
+      const dy = penY - (last ? last.y : penY + 999);
+      if (Math.sqrt(dx * dx + dy * dy) >= MIN_DIST) {
+        points.push({ x: penX, y: penY, birth: now });
+      }
+
+      // Cull dead points
+      points = points.filter(p => (now - p.birth) < LIFE);
+
+      // Draw
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawSmooth(points, p => {
+        const t = (now - p.birth) / LIFE;   // 0=fresh → 1=dead
+        return Math.pow(1 - t, 1.5) * 0.75; // fast fade, same feel as original
+      });
+
+      // Ring follow
+      ringX += (targetX - ringX) * 0.12;
+      ringY += (targetY - ringY) * 0.12;
+      ring.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
+
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.width = '48px'; ring.style.height = '48px';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.width = '32px'; ring.style.height = '32px';
+      });
+    });
+
+    // ── Placement Visualiser ─────────────────────────────────────────────
+    const ZONE_DATA = {
+      // ── Front ──
+      head:      { title:'Head & Face',     desc:'Bold statements and deeply personal choices. Face and head tattoos are highly visible and carry strong meaning. Best suited for experienced collectors ready to commit.',                                               tags:['High Visibility','Bold Commitment','Statement Piece'],   styles:['Blackwork','Geometric','Fine Line','Script'],                       pain:4.5, dot:{x:50,y:7}  },
+      neck:      { title:'Neck',             desc:'A powerful placement bridging the hidden and the seen. Neck tattoos frame the face beautifully and work best with clean, elegant designs that follow natural curves.',                                                   tags:['High Visibility','Elegant','Bold'],                              styles:['Fine Line','Script','Minimal','Ornamental'],                 pain:4,   dot:{x:50,y:13} },
+      chest:     { title:'Chest',            desc:'One of the most meaningful placements — close to the heart. A large canvas with natural symmetry. Hidden when needed, revealed when chosen.',                                                                            tags:['Intimate','Large Canvas','Symmetrical'],                         styles:['Blackwork','Neo-traditional','Illustrative','Geometric'],    pain:3,   dot:{x:50,y:24} },
+      upperarm:  { title:'Upper Arm',        desc:'A classic placement for good reason — excellent canvas, good skin texture, and moderate pain. Works beautifully as a standalone piece or as the start of a sleeve.',                                                    tags:['Beginner Friendly','Sleeve Starter','Versatile'],               styles:['Traditional','Blackwork','Fine Line','Geometric'],           pain:2,   dot:{x:17,y:26} },
+      forearm:   { title:'Forearm & Wrist',  desc:'Always visible, always telling your story. The forearm is one of the most popular placements for its flat surface. Wrist pieces are delicate and intimate.',                                                           tags:['Always Visible','Storytelling','Popular'],                      styles:['Fine Line','Script','Minimal','Illustrative','Blackwork'],  pain:2,   dot:{x:14,y:48} },
+      ribs:      { title:'Ribs & Side',      desc:'Intimate and partially hidden. Rib placements elongate beautifully and work well with flowing, organic designs. One of the more sensitive areas — but stunning results.',                                               tags:['Intimate','Hidden','Flowing'],                                  styles:['Fine Line','Botanical','Script','Illustrative'],             pain:4.5, dot:{x:23,y:36} },
+      abdomen:   { title:'Abdomen',          desc:'A brave and personal canvas. Abdomen tattoos can be highly intricate and decorative. Consider that this area changes with weight and time — design accordingly.',                                                        tags:['Personal','Decorative','Brave Choice'],                         styles:['Ornamental','Geometric','Blackwork','Fine Line'],            pain:3.5, dot:{x:50,y:42} },
+      hip:       { title:'Hip',              desc:'Sensual and partially hidden — revealed only when you choose. This area flows naturally with the body\'s curves, ideal for organic and flowing designs.',                                                                tags:['Hidden','Sensual','Flowing'],                                   styles:['Fine Line','Botanical','Ornamental','Minimal'],              pain:3,   dot:{x:50,y:52} },
+      thigh:     { title:'Thigh',            desc:'A large, flat canvas with relatively low pain. Hidden in everyday wear but dramatic and bold. One of the best spots for large statement pieces.',                                                                        tags:['Large Canvas','Low Pain','Dramatic'],                           styles:['Blackwork','Neo-traditional','Illustrative','Geometric'],    pain:2,   dot:{x:23,y:64} },
+      calf:      { title:'Calf',             desc:'Visible in shorts, hidden otherwise. Great muscle definition adds depth to detailed designs. Works especially well with flowing or vertical compositions.',                                                              tags:['Seasonal Reveal','Detailed','Vertical'],                        styles:['Traditional','Fine Line','Blackwork','Illustrative'],        pain:2.5, dot:{x:21,y:80} },
+      ankle:     { title:'Ankle & Foot',     desc:'Delicate and understated. Ankle tattoos are small, charming, and personal. Note that foot tattoos may need touch-ups over time due to skin wear.',                                                                      tags:['Delicate','Small','Understated'],                               styles:['Fine Line','Minimal','Script','Botanical'],                  pain:3.5, dot:{x:21,y:92} },
+      // ── Back ──
+      neck_back: { title:'Back of Neck',     desc:'Subtle yet striking — visible when hair is up, hidden when it\'s down. The nape is ideal for small, elegant pieces that peek out just enough to intrigue.',                                                            tags:['Subtle','Elegant','Peekaboo'],                                  styles:['Fine Line','Minimal','Script','Geometric'],                  pain:4,   dot:{x:50,y:13} },
+      upperback: { title:'Upper Back',       desc:'One of the most sought-after placements. The upper back offers a wide, flat canvas perfect for large, centred pieces or detailed symmetrical work. Shoulder blades give great natural framing.',                        tags:['Large Canvas','Symmetrical','Statement'],                       styles:['Blackwork','Neo-traditional','Geometric','Illustrative'],    pain:3,   dot:{x:50,y:25} },
+      shoulder:  { title:'Shoulder',         desc:'The shoulder wraps beautifully and connects seamlessly into arm and back pieces. Great for bold standalone work or as an anchor point for a sleeve or back piece.',                                                     tags:['Sleeve Anchor','Bold','Versatile'],                             styles:['Traditional','Blackwork','Neo-traditional','Geometric'],     pain:2.5, dot:{x:18,y:22} },
+      tricep:    { title:'Tricep & Outer Arm',desc:'The outer arm and tricep offer a long, curved canvas that works beautifully with vertical or flowing designs. Less common than the inner arm — gives a more edgy, unexpected look.',                                  tags:['Unexpected','Flowing','Edgy'],                                  styles:['Blackwork','Fine Line','Geometric','Illustrative'],          pain:2.5, dot:{x:14,y:46} },
+      lowerback: { title:'Lower Back',       desc:'Once iconic, now reclaiming its place as a considered, elegant choice. The lower back frames the spine and flows with the body naturally. Works beautifully with symmetrical or ornamental designs.',                    tags:['Symmetrical','Elegant','Ornamental'],                           styles:['Ornamental','Fine Line','Geometric','Botanical'],            pain:3,   dot:{x:50,y:42} },
+      glutes:    { title:'Glutes & Hip',     desc:'A private, personal placement — intimate and rarely seen. This area is surprisingly good for detailed work thanks to the large surface. A bold choice that stays between you and who you choose to share it with.',      tags:['Private','Intimate','Bold'],                                    styles:['Fine Line','Ornamental','Blackwork','Illustrative'],         pain:3,   dot:{x:50,y:54} },
+      hamstring: { title:'Hamstring & Back of Thigh', desc:'An underrated placement with a long, flowing canvas. The back of the thigh suits elongated designs perfectly and is easily hidden or revealed. Surprisingly low on the pain scale.',                          tags:['Underrated','Low Pain','Elongated'],                            styles:['Fine Line','Botanical','Blackwork','Illustrative'],          pain:2,   dot:{x:22,y:66} },
+    };
+
+    let currentView = 'front';
+    let activeZone = null;
+
+    function switchView(view) {
+      currentView = view;
+      resetVis();
+      document.getElementById('svgFront').style.display = view === 'front' ? 'block' : 'none';
+      document.getElementById('svgBack').style.display  = view === 'back'  ? 'block' : 'none';
+      document.getElementById('btnFront').classList.toggle('active', view === 'front');
+      document.getElementById('btnBack').classList.toggle('active',  view === 'back');
+      // Re-bind zones for new svg
+      bindZones();
+    }
+
+    const visPrompt = document.getElementById('visPrompt');
+    const visInfo   = document.getElementById('visInfo');
+    const visDot    = document.getElementById('visDot');
+    const visWrap   = document.getElementById('visBodyWrap');
+
+    function showZone(key) {
+      const d = ZONE_DATA[key];
+      if (!d) return;
+      activeZone = key;
+
+      document.getElementById('visTag').textContent   = `Placement — Pain ${d.pain}/5`;
+      document.getElementById('visTitle').textContent = d.title;
+      document.getElementById('visDesc').textContent  = d.desc;
+      document.getElementById('visTags').innerHTML    = d.tags.map(t=>`<span class="vis-tag">${t}</span>`).join('');
+      document.getElementById('visStyles').innerHTML  = d.styles.map(s=>`<span class="vis-style-pill">${s}</span>`).join('');
+
+      // Move pulsing dot
+      const svgEl  = visWrap.querySelector('.vis-body-svg:not([style*="none"])') || visWrap.querySelector('.vis-body-svg');
+      const svgRect = svgEl.getBoundingClientRect();
+      const wrapRect = visWrap.getBoundingClientRect();
+      visDot.style.left = (svgRect.left - wrapRect.left + d.dot.x/100 * svgRect.width)  + 'px';
+      visDot.style.top  = (svgRect.top  - wrapRect.top  + d.dot.y/100 * svgRect.height) + 'px';
+      visDot.classList.add('show');
+
+      visPrompt.classList.add('hidden');
+      visInfo.classList.add('show');
+
+      document.querySelectorAll('.vis-zone').forEach(z => z.classList.remove('active'));
+      document.querySelectorAll(`.vis-zone[data-zone="${key}"]`).forEach(z => z.classList.add('active'));
+    }
+
+    function resetVis() {
+      activeZone = null;
+      visPrompt.classList.remove('hidden');
+      visInfo.classList.remove('show');
+      visDot.classList.remove('show');
+      document.querySelectorAll('.vis-zone').forEach(z => z.classList.remove('active'));
+    }
+
+    function bindZones() {
+      document.querySelectorAll('.vis-zone').forEach(zone => {
+        // Remove old listeners by cloning
+        const fresh = zone.cloneNode(true);
+        zone.parentNode.replaceChild(fresh, zone);
+      });
+      document.querySelectorAll('.vis-zone').forEach(zone => {
+        zone.addEventListener('click', () => showZone(zone.dataset.zone));
+        zone.addEventListener('mouseenter', () => {
+          if (!activeZone) {
+            document.querySelectorAll('.vis-zone').forEach(z => z.classList.remove('active'));
+            zone.classList.add('active');
+          }
+        });
+        zone.addEventListener('mouseleave', () => {
+          if (!activeZone) zone.classList.remove('active');
+        });
+      });
+    }
+
+    document.getElementById('visReset').addEventListener('click', resetVis);
+    bindZones(); // initial bind
+
+    // ── Mood Board ────────────────────────────────────────────────────────
+    const mbSelections = { style: null, vibe: null, size: null };
+    const mbGenerateBtn = document.getElementById('mbGenerateBtn');
+    const mbResult  = document.getElementById('mbResult');
+    const mbLoading = document.getElementById('mbLoading');
+    const mbContent = document.getElementById('mbContent');
+
+    // ── Direction library — style × vibe combos ───────────────────────────
+    // Each entry covers a style+vibe pair. Size adjusts the suggestions.
+    const DIRECTIONS = {
+      'Fine Line|Dark & Moody': {
+        title: 'Quiet Darkness, <em>Precisely Drawn</em>',
+        body: 'You\'re drawn to art that whispers rather than shouts — shadow and restraint over noise. Fine line work in a dark palette creates something hauntingly beautiful: intimate, considered, and impossible to ignore.',
+        suggestions: ['Single-needle linework of gothic botanicals or withered florals', 'A moth or raven rendered in hairline strokes with negative space', 'Subtle stippling to build depth without solid fills']
+      },
+      'Fine Line|Soft & Ethereal': {
+        title: 'Like Smoke, <em>Never Solid</em>',
+        body: 'Delicate and dreamlike — your tattoo should feel like it was always there, part of you. Fine line at its most poetic: barely-there strokes that suggest rather than declare.',
+        suggestions: ['Loose wildflowers or dried botanicals with broken, airy linework', 'A crescent moon or star cluster in single-needle detail', 'Watercolour-inspired washes with fine line outlines that fade at the edges']
+      },
+      'Fine Line|Bold & Powerful': {
+        title: 'Steel Wrapped <em>in Silk</em>',
+        body: 'Contradiction is your strength — delicate in technique, fierce in meaning. Fine line gives you precision; your subject matter gives you power. The contrast is exactly what makes it unforgettable.',
+        suggestions: ['A lioness or eagle rendered in ultra-fine linework — detail over bulk', 'Armour or weaponry reimagined as intricate line drawings', 'Bold text or a personal motto in refined, thin lettering']
+      },
+      'Fine Line|Nature & Organic': {
+        title: 'The World Drawn <em>Thin</em>',
+        body: 'Nature already has perfect lines — your tattoo should follow them. Fine line botanical work at its best captures the fragility and resilience of the natural world in a single, continuous stroke.',
+        suggestions: ['A sprig of lavender or eucalyptus with every vein visible', 'Mushrooms, ferns, or moss in scientific illustration style', 'A continuous line landscape — mountains or coastline in one unbroken stroke']
+      },
+      'Fine Line|Sacred & Spiritual': {
+        title: 'Sacred Geometry, <em>Drawn Lightly</em>',
+        body: 'Spiritual work in fine line carries a meditative quality — as though the act of drawing it was itself a ritual. Precise, intentional, and quietly profound.',
+        suggestions: ['Mandala or sacred geometry in ultra-thin repeated linework', 'A meaningful symbol — om, ankh, triquetra — stripped back to its purest form', 'Celestial mapping: constellations, birth charts, or lunar phases']
+      },
+      'Fine Line|Elegant & Refined': {
+        title: 'Nothing Extra. <em>Everything Precise.</em>',
+        body: 'Refinement is your language. Fine line work at its most considered — no excess, no noise, just the essential mark. This is tattooing as jewellery.',
+        suggestions: ['A single botanical stem with architectural precision', 'Minimalist portraiture — a face or figure in continuous line', 'Fine line calligraphy of a word or date that means everything']
+      },
+      'Blackwork|Dark & Moody': {
+        title: 'Ink as <em>Armour</em>',
+        body: 'Full, uncompromising blackwork for someone who wears darkness with intention. This is tattooing at its most primal — bold, permanent, unapologetic. It will demand attention and reward it.',
+        suggestions: ['Large-scale black fills with negative space creating the design', 'A dark forest, crumbling architecture, or occult imagery in solid black', 'Dotwork shading building from deep shadow to skin — no outlines needed']
+      },
+      'Blackwork|Bold & Powerful': {
+        title: 'Black. <em>Absolute. Permanent.</em>',
+        body: 'You want presence — something that announces itself. Blackwork gives you maximum visual impact and ages beautifully over decades. This is a tattoo people will remember.',
+        suggestions: ['Bold tribal-influenced patterns with strong geometric contrast', 'A powerful animal in full blackwork with layered texture', 'Abstract black forms that play with positive and negative space']
+      },
+      'Blackwork|Sacred & Spiritual': {
+        title: 'Ancient Marks, <em>Modern Skin</em>',
+        body: 'Blackwork has been the language of ritual and devotion for thousands of years. Your tattoo should carry that weight — something that feels like it belongs to a tradition older than you.',
+        suggestions: ['Polynesian or Maori-inspired patterns adapted to your personal story', 'Sacred symbols built into geometric blackwork compositions', 'Eye of providence, serpent, or tree of life in bold black illustration']
+      },
+      'Blackwork|Raw & Edgy': {
+        title: 'Torn From <em>the Dark</em>',
+        body: 'No softness, no apology. Raw blackwork pushes against refinement — it has texture, attitude, and an energy that polished work can\'t replicate. You want something that bites.',
+        suggestions: ['Woodcut or linocut-inspired imagery with intentional roughness', 'Glitch or distorted blackwork — like corrupted beauty', 'Heavy black fills with deliberately uneven edges and expressive marks']
+      },
+      'Geometric|Dark & Moody': {
+        title: 'Order Inside <em>the Void</em>',
+        body: 'Geometry in darkness: precise structures that feel like they were pulled from somewhere unknown. Sacred math rendered in shadow, carrying weight and mystery in equal measure.',
+        suggestions: ['Dark geometric mandalas with deep dotwork shading', 'Architectural forms — arches, prisms — in stark black geometry', 'A geometric animal portrait with dark fills and sharp contrast']
+      },
+      'Geometric|Soft & Ethereal': {
+        title: 'Shapes That <em>Dissolve</em>',
+        body: 'Not all geometry is rigid. Your vision lives in the space where structure meets softness — forms that feel mathematical yet somehow organic, like frost on glass.',
+        suggestions: ['Geometric florals where petals are built from triangles and curves', 'Fine line sacred geometry that fades at the edges', 'A geometric moon phase or crystal cluster in delicate linework']
+      },
+      'Geometric|Bold & Powerful': {
+        title: 'Built Like <em>Architecture</em>',
+        body: 'Geometry as statement — clean, architectural, and commanding. This tattoo will feel designed rather than drawn: every angle intentional, every line load-bearing.',
+        suggestions: ['A bold geometric wolf or bear — facets instead of fur', 'Interlocking geometric shapes building toward a focal symbol', 'Metatron\'s cube or other sacred geometric forms in strong black linework']
+      },
+      'Geometric|Nature & Organic': {
+        title: 'Nature\'s Hidden <em>Mathematics</em>',
+        body: 'Nature runs on geometry — fibonacci spirals, hexagonal cells, fractal branches. Your tattoo sits at that intersection: organic subjects revealed through their underlying mathematical truth.',
+        suggestions: ['A geometric forest or mountain range built from triangulated planes', 'Flora with geometric precision — petals as perfect polygons', 'A koi or hummingbird rendered in low-poly geometric style']
+      },
+      'Neo-Traditional|Dark & Moody': {
+        title: 'Old Lore, <em>New Darkness</em>',
+        body: 'Neo-traditional in a dark palette — rich, narrative, and atmospheric. This is folklore rendered in ink: heavy lines, jewel-toned shadows, and subject matter that carries centuries of meaning.',
+        suggestions: ['A raven or black cat with neo-traditional bold outlines and dark shading', 'Gothic florals — black roses, belladonna, dead botanicals', 'Memento mori imagery reimagined with neo-traditional technique and flair']
+      },
+      'Neo-Traditional|Bold & Powerful': {
+        title: 'Illustrated <em>With Intent</em>',
+        body: 'Neo-traditional at full power — colour, line weight, and composition working together to create something vivid and memorable. This is the tattoo that turns heads across the room.',
+        suggestions: ['A roaring tiger or eagle with exaggerated neo-traditional proportions', 'A bold floral chest or shoulder piece with rich depth and linework', 'A warrior or mythological figure in full neo-traditional illustration']
+      },
+      'Illustrative|Soft & Ethereal': {
+        title: 'A Story Told <em>in Brushstrokes</em>',
+        body: 'Illustrative work at its most dreamlike — soft edges, painterly shading, and subject matter that feels lifted from a hand-illustrated novel. Romantic, personal, and timeless.',
+        suggestions: ['A delicate portrait or figure emerging from botanical surroundings', 'Book illustration-style imagery — a scene, a moment, a place', 'Loose ink-wash style with fine linework details on top']
+      },
+      'Illustrative|Nature & Organic': {
+        title: 'Field Notes <em>in Ink</em>',
+        body: 'Scientific illustration meets fine art tattooing. Your work should feel documented — like a botanist\'s sketchbook brought to life on skin. Precise observation rendered with artistic soul.',
+        suggestions: ['Botanical illustration with Latin labels and fine detail', 'A nature scene — a tide pool, a forest floor, a bird in flight', 'Insects, fungi, or sea creatures in natural history illustration style']
+      },
+      'Minimalist|Soft & Ethereal': {
+        title: 'The Mark <em>That Stays</em>',
+        body: 'Less is a discipline, not a limitation. One perfect line, one considered shape — something so simple it feels inevitable. This tattoo won\'t age, won\'t date, won\'t ever feel like too much.',
+        suggestions: ['A single continuous line that forms a meaningful shape', 'One small symbol placed with absolute precision', 'Negative space work — form defined by what isn\'t there']
+      },
+      'Minimalist|Elegant & Refined': {
+        title: 'Nothing Wasted. <em>Everything Meant.</em>',
+        body: 'True minimalism is the hardest discipline in tattooing — every mark must justify its existence. Yours will. Clean, intentional, and quietly luxurious.',
+        suggestions: ['A word, date, or coordinates in clean, refined typography', 'One small motif with perfect proportion and placement', 'A barely-there design that only reveals itself up close']
+      },
+      'Ornamental|Sacred & Spiritual': {
+        title: 'Adorned With <em>Meaning</em>',
+        body: 'Ornamental work rooted in spiritual symbolism — your body as a sacred space, decorated with intention. Patterns that carry history and weight, rendered with jewel-like precision.',
+        suggestions: ['Mandala-based ornamental work framing a central sacred symbol', 'Hamsa, evil eye, or lotus built into decorative geometric patterns', 'Collar or cuff ornamental designs that wrap the body like ceremonial jewellery']
+      },
+      'Ornamental|Elegant & Refined': {
+        title: 'Wear It Like <em>Gold</em>',
+        body: 'Ornamental tattooing at its most luxurious — fine detail, perfect symmetry, and placement that makes the tattoo feel like an extension of the body rather than decoration on top of it.',
+        suggestions: ['A fine ornamental sternum piece with chandelier-like detail', 'Lace-inspired patterns for collar, wrist, or ankle', 'Jewellery-style finger or hand ornamentation in detailed linework']
+      },
+      'Abstract|Raw & Edgy': {
+        title: 'No Rules. <em>Just Marks.</em>',
+        body: 'Abstract work gives your artist the most creative freedom — and produces the most truly unique results. Expressive, gestural, and impossible to replicate exactly. This one is yours alone.',
+        suggestions: ['Gestural ink-blot or brushstroke-inspired abstract shapes', 'Abstract portraiture — a face suggested rather than drawn', 'Expressive black abstract forms with unexpected negative space']
+      },
+      'Abstract|Witty & Playful': {
+        title: 'Unexpected. <em>Entirely You.</em>',
+        body: 'Abstract with a sense of humour — work that makes people look twice, then smile. Clever, surprising, and distinctly personal. The kind of tattoo with a story you\'ll enjoy telling.',
+        suggestions: ['An abstract shape that secretly forms something recognisable', 'Pop art-inspired abstraction with bold colours and flat shapes', 'A playful distorted figure or object — surrealism on skin']
+      }
+    };
+
+    // Size modifiers — appended to suggestions based on size pick
+    const SIZE_NOTES = {
+      'Tiny & Delicate (coin-sized)':    'Keep it small and precise — placement is everything at this scale. Consider the inner wrist, behind the ear, or the ankle.',
+      'Medium (palm-sized)':             'Medium scale gives room for detail without overwhelming. Upper arm, forearm, or thigh are ideal canvases.',
+      'Large Statement Piece':           'Go bold with composition — use the full canvas. Thigh, back, or chest will carry this beautifully.',
+      'Full Sleeve or Back Piece':       'Plan the flow across the whole canvas first. A great sleeve or back piece is built in sessions — start with the anchor and grow outward.'
+    };
+
+    function getDirection(style, vibe, size) {
+      // Try exact match first
+      let key = `${style}|${vibe}`;
+      let d = DIRECTIONS[key];
+
+      // Fallback: find any entry with matching style
+      if (!d) {
+        const fallbackKey = Object.keys(DIRECTIONS).find(k => k.startsWith(style + '|'));
+        d = fallbackKey ? DIRECTIONS[fallbackKey] : null;
+      }
+
+      // Final fallback
+      if (!d) {
+        d = {
+          title: 'A Direction <em>All Your Own</em>',
+          body: 'Your combination is rare — which means your tattoo should be too. Bring your style, vibe, and vision to the consultation and we\'ll build something from scratch that\'s entirely yours.',
+          suggestions: ['Start with a mood board of references — images, textures, feelings', 'Think about what the tattoo should mean in 20 years, not just today', 'Trust the process — the best work comes from a real conversation']
+        };
+      }
+
+      // Add size note as a 4th suggestion
+      const sizeNote = SIZE_NOTES[size];
+      const suggestions = sizeNote
+        ? [...d.suggestions, sizeNote]
+        : d.suggestions;
+
+      return { ...d, suggestions };
+    }
+
+    // Chip selection — one per group
+    document.querySelectorAll('.mb-chips').forEach(group => {
+      const groupName = group.dataset.group;
+      group.querySelectorAll('.mb-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          group.querySelectorAll('.mb-chip').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          mbSelections[groupName] = chip.dataset.value;
+          const allPicked = mbSelections.style && mbSelections.vibe && mbSelections.size;
+          mbGenerateBtn.disabled = !allPicked;
+        });
+      });
+    });
+
+    mbGenerateBtn.addEventListener('click', generateMoodBoard);
+    document.getElementById('mbRedo').addEventListener('click', () => {
+      mbResult.classList.remove('show');
+      mbContent.classList.remove('show');
+    });
+
+    function generateMoodBoard() {
+      const { style, vibe, size } = mbSelections;
+
+      // Show result panel with brief loading delay for effect
+      mbResult.classList.add('show');
+      mbContent.classList.remove('show');
+      mbLoading.style.display = 'flex';
+      mbGenerateBtn.disabled = true;
+
+      document.getElementById('mbSelSummary').innerHTML =
+        [style, vibe, size].map(v => `<span class="mb-sel-tag">${v}</span>`).join('');
+
+      setTimeout(() => {
+        const result = getDirection(style, vibe, size);
+
+        document.getElementById('mbTitle').innerHTML = result.title;
+        document.getElementById('mbBody').textContent = result.body;
+        document.getElementById('mbSuggestions').innerHTML = result.suggestions
+          .map(s => `<div class="mb-suggestion"><div class="mb-suggestion-dot"></div><span>${s}</span></div>`)
+          .join('');
+
+        mbLoading.style.display = 'none';
+        mbContent.classList.add('show');
+        mbGenerateBtn.disabled = false;
+      }, 900); // small delay feels intentional, not instant
+    }
+
+    // ── Style Quiz ────────────────────────────────────────────────────────
+    const SQ_QUESTIONS = [
+      {
+        text: 'You\'re drawn to a piece of art. What stops you in your tracks?',
+        options: [
+          { icon: '🌿', title: 'A botanical illustration', sub: 'Delicate, precise, every vein visible', scores: { fineline: 3, minimalist: 1 } },
+          { icon: '🖤', title: 'A bold ink print', sub: 'Heavy blacks, raw contrast, no apology', scores: { blackwork: 3, neotraditional: 1 } },
+          { icon: '🔷', title: 'A geometric pattern', sub: 'Clean angles, perfect symmetry, order', scores: { geometric: 3, ornamental: 1 } },
+          { icon: '🎨', title: 'A loose painting', sub: 'Expressive, gestural, full of feeling', scores: { illustrative: 3, abstract: 1 } },
+        ]
+      },
+      {
+        text: 'Pick the object you\'d most want sitting on your shelf.',
+        options: [
+          { icon: '🕯️', title: 'A single white candle', sub: 'Minimal. Intentional. Nothing extra.', scores: { minimalist: 3, fineline: 1 } },
+          { icon: '📿', title: 'An antique rosary', sub: 'Sacred, ornate, layered with meaning', scores: { ornamental: 3, neotraditional: 1 } },
+          { icon: '🐍', title: 'A carved obsidian serpent', sub: 'Dark, powerful, slightly unsettling', scores: { blackwork: 3, geometric: 1 } },
+          { icon: '🌸', title: 'A pressed wildflower frame', sub: 'Organic, soft, found in nature', scores: { fineline: 2, illustrative: 2 } },
+        ]
+      },
+      {
+        text: 'What does your tattoo need to do?',
+        options: [
+          { icon: '🤫', title: 'Whisper a secret', sub: 'Only visible up close, deeply personal', scores: { fineline: 3, minimalist: 2 } },
+          { icon: '⚡', title: 'Command a room', sub: 'Seen from across the street, unforgettable', scores: { blackwork: 2, neotraditional: 3 } },
+          { icon: '🧭', title: 'Tell a story', sub: 'Layered meaning, narrative, symbolic depth', scores: { illustrative: 3, ornamental: 1 } },
+          { icon: '⚖️', title: 'Hold a truth', sub: 'Grounded in something permanent and real', scores: { geometric: 2, minimalist: 2 } },
+        ]
+      },
+      {
+        text: 'The environment that feels most like home to you.',
+        options: [
+          { icon: '🌲', title: 'A dense, quiet forest', sub: 'Mossy, still, alive with texture', scores: { illustrative: 2, fineline: 2 } },
+          { icon: '🏙️', title: 'A city at 2am', sub: 'Neon, concrete, sharp edges and shadows', scores: { blackwork: 2, geometric: 2 } },
+          { icon: '🏛️', title: 'An ancient temple', sub: 'Stone, carved patterns, built to last forever', scores: { ornamental: 3, geometric: 1 } },
+          { icon: '🌊', title: 'Open ocean at dusk', sub: 'Vast, untamed, quietly overwhelming', scores: { abstract: 2, illustrative: 2 } },
+        ]
+      },
+      {
+        text: 'Finally — how do you want to feel looking at your tattoo in 20 years?',
+        options: [
+          { icon: '✨', title: 'Quietly proud', sub: 'It still feels like the truest part of me', scores: { minimalist: 3, fineline: 1 } },
+          { icon: '🔥', title: 'Still impressed', sub: 'It still has the same impact as day one', scores: { blackwork: 2, neotraditional: 2 } },
+          { icon: '💎', title: 'Like wearing art', sub: 'Museum-quality, timeless, considered', scores: { ornamental: 2, geometric: 2 } },
+          { icon: '🌀', title: 'Like it was always there', sub: 'Part of me, not decoration on me', scores: { fineline: 2, abstract: 2 } },
+        ]
+      }
+    ];
+
+    const SQ_RESULTS = {
+      fineline:      { title: 'Fine Line <em>Minimalist</em>',        desc: 'You\'re precise, intentional, and quietly confident. Your tattoo doesn\'t need to announce itself — it reveals itself. Fine line work is your language: delicate marks with permanent meaning, made to be discovered rather than displayed.',          traits: ['Delicate Detail', 'Whispered Meaning', 'Timeless', 'Understated'] },
+      minimalist:    { title: 'The <em>Purist</em>',                  desc: 'Less is everything to you. One perfect mark, placed with absolute intention. You\'re not here for decoration — you\'re here for the essential. Your tattoo will be small enough to overlook and significant enough to never forget.',                    traits: ['One Mark', 'Pure Intention', 'Precision', 'Restraint'] },
+      blackwork:     { title: 'Blackwork <em>Bold</em>',              desc: 'You wear ink like armour. Heavy blacks, raw contrast, unapologetic presence — your tattoo makes a statement without needing words. This is tattooing at its most primal, and you\'re exactly the person it was made for.',                               traits: ['Bold Contrast', 'Permanent Power', 'No Compromise', 'Raw'] },
+      geometric:     { title: 'Geometric <em>Architect</em>',         desc: 'You think in systems and find beauty in structure. Geometry appeals to your need for order without coldness — every angle is intentional, every line load-bearing. Your tattoo is designed, not drawn.',                                                   traits: ['Structured', 'Mathematical', 'Clean', 'Considered'] },
+      neotraditional:{ title: 'Neo-Traditional <em>Storyteller</em>', desc: 'Rich, narrative, and vivid — you want a tattoo that carries weight and turns heads. Neo-traditional gives you bold outlines, expressive colour, and subject matter pulled from lore and mythology. You\'re building a collection, not a single piece.',     traits: ['Rich Colour', 'Bold Lines', 'Narrative', 'Iconic'] },
+      illustrative:  { title: 'Illustrative <em>Dreamer</em>',        desc: 'Your skin is a canvas for story. Illustrative work turns your ideas into fully-realised worlds — organic, painterly, and deeply personal. You want art that feels hand-made, not stamped.',                                                               traits: ['Painterly', 'Organic', 'Narrative', 'Hand-Crafted'] },
+      ornamental:    { title: 'Ornamental <em>Devotee</em>',          desc: 'Sacred, decorative, and considered — you understand that your body is a space worth adorning with intention. Ornamental work at its finest feels like jewellery you\'ll never take off: symmetrical, intricate, and built to age like gold.',              traits: ['Sacred Detail', 'Symmetry', 'Luxurious', 'Ceremonial'] },
+      abstract:      { title: 'Abstract <em>Expressionist</em>',      desc: 'You resist definition — and that\'s your greatest strength. Abstract work gives you something no one else has: a tattoo that means exactly what you decide it means, rendered in marks that can\'t be replicated. Truly, entirely yours.',                  traits: ['Unique', 'Expressive', 'Unrepeatable', 'Free'] },
+    };
+
+    let sqScores = { fineline: 0, minimalist: 0, blackwork: 0, geometric: 0, neotraditional: 0, illustrative: 0, ornamental: 0, abstract: 0 };
+    let sqCurrent = 0;
+    const sqContainer = document.getElementById('sqQuestions');
+    const sqResult    = document.getElementById('sqResult');
+    const sqProgress  = document.getElementById('sqProgressBar');
+    const sqLabel     = document.getElementById('sqProgressLabel');
+
+    function sqBuild() {
+      sqContainer.innerHTML = '';
+      SQ_QUESTIONS.forEach((q, qi) => {
+        const div = document.createElement('div');
+        div.className = 'sq-question' + (qi === 0 ? ' active' : '');
+        div.id = `sqQ${qi}`;
+        div.innerHTML = `
+          <div class="sq-q-text">${q.text}</div>
+          <div class="sq-options">
+            ${q.options.map((o, oi) => `
+              <button class="sq-option" data-qi="${qi}" data-oi="${oi}">
+                <div class="sq-opt-icon">${o.icon}</div>
+                <div class="sq-opt-body">
+                  <div class="sq-opt-title">${o.title}</div>
+                  <div class="sq-opt-sub">${o.sub}</div>
+                </div>
+              </button>`).join('')}
+          </div>`;
+        sqContainer.appendChild(div);
+      });
+
+      // Bind clicks
+      document.querySelectorAll('.sq-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qi = parseInt(btn.dataset.qi);
+          const oi = parseInt(btn.dataset.oi);
+          const opt = SQ_QUESTIONS[qi].options[oi];
+
+          // Visual feedback
+          document.querySelectorAll(`#sqQ${qi} .sq-option`).forEach(b => b.classList.remove('chosen'));
+          btn.classList.add('chosen');
+
+          // Score
+          Object.entries(opt.scores).forEach(([k, v]) => { sqScores[k] = (sqScores[k] || 0) + v; });
+
+          // Advance after short delay
+          setTimeout(() => sqNext(qi), 380);
+        });
+      });
+    }
+
+    function sqNext(qi) {
+      document.getElementById(`sqQ${qi}`).classList.remove('active');
+      sqCurrent = qi + 1;
+
+      if (sqCurrent >= SQ_QUESTIONS.length) {
+        sqShowResult();
+        return;
+      }
+
+      document.getElementById(`sqQ${sqCurrent}`).classList.add('active');
+      const pct = ((sqCurrent) / SQ_QUESTIONS.length) * 100;
+      sqProgress.style.width = pct + '%';
+      sqLabel.textContent = `Question ${sqCurrent + 1} of ${SQ_QUESTIONS.length}`;
+    }
+
+    function sqShowResult() {
+      sqProgress.style.width = '100%';
+      sqLabel.textContent = 'Complete';
+
+      // Find top scorer
+      const top = Object.entries(sqScores).sort((a, b) => b[1] - a[1])[0][0];
+      const r = SQ_RESULTS[top];
+
+      document.getElementById('sqResultTitle').innerHTML = r.title;
+      document.getElementById('sqResultDesc').textContent = r.desc;
+      document.getElementById('sqResultTraits').innerHTML = r.traits.map(t => `<span class="sq-trait">${t}</span>`).join('');
+
+      sqContainer.style.display = 'none';
+      sqResult.style.display = 'block';
+      requestAnimationFrame(() => requestAnimationFrame(() => sqResult.classList.add('show')));
+    }
+
+    function sqReset() {
+      sqScores = { fineline: 0, minimalist: 0, blackwork: 0, geometric: 0, neotraditional: 0, illustrative: 0, ornamental: 0, abstract: 0 };
+      sqCurrent = 0;
+      sqResult.classList.remove('show');
+      sqResult.style.display = 'none';
+      sqContainer.style.display = '';
+      sqProgress.style.width = '20%';
+      sqLabel.textContent = 'Question 1 of 5';
+      sqBuild();
+    }
+
+    document.getElementById('sqRetake').addEventListener('click', sqReset);
+    sqBuild(); // initialise
+
+    // ── Portfolio Slider ──────────────────────────────────────────────────
+    (function() {
+      const SLIDE_DURATION = 5500; // ms per slide
+      const track    = document.getElementById('pfTrack');
+      const wrap     = document.getElementById('pfWrap');
+      const progress = document.getElementById('pfProgress');
+      const dotsEl   = document.getElementById('pfDots');
+      const slides   = Array.from(track.querySelectorAll('.pf-slide'));
+      const total    = slides.length;
+      let current    = 0;
+      let autoTimer  = null;
+      let progTimer  = null;
+      let paused     = false;
+
+      // Build dots
+      dotsEl.innerHTML = slides.map((_, i) =>
+        `<button class="pf-dot${i===0?' active':''}" onclick="pfGoTo(${i})"></button>`
+      ).join('');
+
+      window.pfGoTo = function(i) { pfSet(i); resetAuto(); };
+      window.pfMove = function(dir) { pfSet((current + dir + total) % total); resetAuto(); };
+
+      function pfSet(idx) {
+        slides[current].classList.remove('active');
+        current = (idx + total) % total;
+        slides[current].classList.add('active');
+
+        // Translate track so active slide is centred in viewport
+        const slideW = slides[0].offsetWidth + 24; // gap 1.5rem ≈ 24px
+        track.style.transform = `translateX(-${current * slideW}px)`;
+
+        // Buttons
+        document.getElementById('pfPrev').disabled = current === 0;
+        document.getElementById('pfNext').disabled = current === total - 1;
+
+        // Dots
+        dotsEl.querySelectorAll('.pf-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+
+        // Reset progress bar
+        progress.style.transition = 'none';
+        progress.style.width = '0%';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          progress.style.transition = `width ${SLIDE_DURATION}ms linear`;
+          progress.style.width = '100%';
+        }));
+      }
+
+      function resetAuto() {
+        clearTimeout(autoTimer);
+        if (!paused) startAuto();
+      }
+
+      function startAuto() {
+        // Restart progress bar
+        progress.style.transition = 'none';
+        progress.style.width = '0%';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          progress.style.transition = `width ${SLIDE_DURATION}ms linear`;
+          progress.style.width = '100%';
+        }));
+        autoTimer = setTimeout(() => {
+          pfSet((current + 1) % total);
+          startAuto();
+        }, SLIDE_DURATION);
+      }
+
+      // Pause on hover
+      wrap.addEventListener('mouseenter', () => { paused = true; clearTimeout(autoTimer); progress.style.transition = 'none'; });
+      wrap.addEventListener('mouseleave', () => { paused = false; resetAuto(); });
+
+      // Touch swipe
+      let touchStartX = 0;
+      wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      wrap.addEventListener('touchend',   e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) { pfMove(dx < 0 ? 1 : -1); }
+      }, { passive: true });
+
+      // Keyboard arrows
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  pfMove(-1);
+        if (e.key === 'ArrowRight') pfMove(1);
+      });
+
+      // Kick off
+      pfSet(0);
+      startAuto();
+    })();
+
+    // ── Mobile bottom bar ─────────────────────────────────────────────────
+    function toggleMobMore() {
+      const drawer = document.getElementById('mobMoreDrawer');
+      const btn    = document.getElementById('mobMoreBtn');
+      const isOpen = drawer.classList.contains('open');
+      drawer.classList.toggle('open', !isOpen);
+      btn.classList.toggle('nav-active', !isOpen);
+    }
+    function closeMobMore() {
+      document.getElementById('mobMoreDrawer').classList.remove('open');
+      document.getElementById('mobMoreBtn').classList.remove('nav-active');
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('#mobMoreBtn') && !e.target.closest('#mobMoreDrawer')) closeMobMore();
+    });
+
+    // ── Active section highlighting ────────────────────────────────────────
+    const navSections = ['portfolio','visualiser','moodboard','stylequiz','booking','aftercare','about','testimonials','location'];
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          document.querySelectorAll('.nav-links a, .mob-tab[data-section], .mob-more-link').forEach(a => {
+            const href = a.getAttribute('href') || '';
+            a.classList.toggle('nav-active', href === '#' + id);
+          });
+          // Update mobile tab active state
+          document.querySelectorAll('.mob-tab[data-section]').forEach(t => {
+            t.classList.toggle('nav-active', t.dataset.section === id);
+          });
+        }
+      });
+    }, { threshold: 0.25 });
+    navSections.forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
+
+    // ── Testimonials carousel ─────────────────────────────────────────────
+    const TESTI_TOTAL = 6;
+    const TESTI_VISIBLE = () => window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 1 : 3;
+    let testiIdx = 0;
+
+    function testiMove(dir) {
+      const vis  = TESTI_VISIBLE();
+      const maxIdx = TESTI_TOTAL - vis;
+      testiIdx = Math.max(0, Math.min(testiIdx + dir, maxIdx));
+      const track = document.getElementById('testiTrack');
+      const cardW = track.children[0].getBoundingClientRect().width + 24; // gap = 1.5rem ≈ 24px
+      track.style.transform = `translateX(-${testiIdx * cardW}px)`;
+      document.getElementById('testiBtnPrev').disabled = testiIdx === 0;
+      document.getElementById('testiBtnNext').disabled = testiIdx >= maxIdx;
+      document.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === testiIdx));
+    }
+
+    function testiInitDots() {
+      const vis = TESTI_VISIBLE();
+      const count = TESTI_TOTAL - vis + 1;
+      const dotsEl = document.getElementById('testiDots');
+      dotsEl.innerHTML = Array.from({length: count}, (_, i) =>
+        `<button class="testi-dot${i===0?' active':''}" onclick="testiGoTo(${i})"></button>`
+      ).join('');
+    }
+    function testiGoTo(i) { testiMove(i - testiIdx); }
+
+    testiInitDots();
+    window.addEventListener('resize', () => { testiIdx = 0; testiInitDots(); testiMove(0); });
+
+    // ── Scroll reveal ─────────────────────────────────────────────────────
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Section entry bloom ───────────────────────────────────────────────
+    // Create a single overlay element reused for all blooms
+    const bloomEl = document.createElement('div');
+    bloomEl.style.cssText = `
+      position: fixed;
+      inset: 0;
+      z-index: 9995;
+      pointer-events: none;
+      opacity: 0;
+      background: linear-gradient(to bottom, rgba(110,15,15,0.4) 0%, transparent 60%);
+      transition: opacity 0.35s ease;
+    `;
+    document.body.appendChild(bloomEl);
+
+    let bloomTimeout = null;
+    function fireBloom() {
+      clearTimeout(bloomTimeout);
+      bloomEl.style.opacity = '1';
+      bloomTimeout = setTimeout(() => {
+        bloomEl.style.transition = 'opacity 0.9s ease';
+        bloomEl.style.opacity = '0';
+        bloomTimeout = setTimeout(() => {
+          bloomEl.style.transition = 'opacity 0.35s ease';
+        }, 900);
+      }, 280);
+    }
+
+    const bloomSections = ['portfolio','visualiser','moodboard','stylequiz','booking','aftercare','testimonials','about','location'];
+    const bloomObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) fireBloom();
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+    bloomSections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) bloomObserver.observe(el);
+    });
+
+    // ── Nav hide on scroll ────────────────────────────────────────────────
+    let lastScroll = 0;
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      nav.style.transition = 'opacity 0.3s';
+      nav.style.opacity = (current > lastScroll && current > 100) ? '0' : '1';
+      nav.style.pointerEvents = (current > lastScroll && current > 100) ? 'none' : 'all';
+      lastScroll = current;
+    });
+  </script>
+</body>
+</html>
