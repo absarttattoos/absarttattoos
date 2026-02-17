@@ -471,7 +471,7 @@
 
     .pf-slide {
       flex: 0 0 80%;
-      aspect-ratio: 3/2;
+      height: 72vh;
       max-height: 72vh;
       position: relative;
       overflow: hidden;
@@ -2132,39 +2132,39 @@
       <div class="pf-track" id="pfTrack">
         <!-- Slide 1 -->
         <div class="pf-slide active">
-          <img src="image.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <!-- Slide 2 -->
         <div class="pf-slide">
-          <img src="image1.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <!-- Slide 3 -->
         <div class="pf-slide">
-          <img src="image2.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image2.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <!-- Slide 4 -->
         <div class="pf-slide">
-          <img src="image3.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image3.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <!-- Slide 5 -->
         <div class="pf-slide">
-          <img src="image4.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image4.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <!-- Slide 6 -->
         <div class="pf-slide">
-          <img src="image5.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image5.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <!-- Slide 7 -->
         <div class="pf-slide">
-          <img src="image6.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image6.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <!-- Slide 8 -->
         <div class="pf-slide">
-          <img src="image7.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image7.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <!-- Slide 9 -->
         <div class="pf-slide">
-          <img src="image8.png" style="width:100%;height:100%;object-fit:cover;">
+          <img src="image8.png" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
       </div>
 
@@ -2249,64 +2249,41 @@
           <!-- BACK VIEW -->
           <svg id="svgBack" class="vis-body-svg" viewBox="0 0 200 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
             <g stroke="#6b5f52" stroke-width="1.8" fill="none">
-              <!-- Head (back) -->
               <ellipse cx="100" cy="36" rx="22" ry="26"/>
-              <!-- Neck -->
               <line x1="90" y1="60" x2="87" y2="76"/>
               <line x1="110" y1="60" x2="113" y2="76"/>
-              <!-- Shoulders & back torso -->
               <path d="M87 76 Q60 80 50 98 L46 162 Q46 172 56 174 L70 176"/>
               <path d="M113 76 Q140 80 150 98 L154 162 Q154 172 144 174 L130 176"/>
               <line x1="70" y1="176" x2="130" y2="176"/>
-              <!-- Spine line -->
               <line x1="100" y1="76" x2="100" y2="210" stroke-dasharray="2 4" stroke="#4a3f35"/>
-              <!-- Shoulder blade hints -->
               <path d="M72 98 Q82 110 78 136 Q70 138 64 128 Q60 114 68 102 Z" stroke="#5a4f45"/>
               <path d="M128 98 Q118 110 122 136 Q130 138 136 128 Q140 114 132 102 Z" stroke="#5a4f45"/>
-              <!-- Lower back -->
               <path d="M70 176 Q68 198 72 212 L128 212 Q132 198 130 176"/>
-              <!-- Glutes -->
               <path d="M72 212 Q58 220 56 234 L60 282"/>
               <path d="M128 212 Q142 220 144 234 L140 282"/>
               <path d="M60 282 Q80 270 100 274 Q120 270 140 282"/>
-              <!-- Legs back -->
               <path d="M60 282 Q54 332 56 382 L60 462 Q62 472 66 474 L74 474 Q78 472 78 462 L76 382"/>
               <path d="M140 282 Q146 332 144 382 L140 462 Q138 472 134 474 L126 474 Q122 472 122 462 L124 382"/>
-              <!-- Arms back -->
               <path d="M50 98 Q36 118 32 150 L28 202 Q26 212 30 218 L36 220"/>
               <path d="M36 220 Q34 262 36 302 L38 322 Q40 328 44 328 L48 328 Q52 328 54 322 L56 302"/>
               <path d="M150 98 Q164 118 168 150 L172 202 Q174 212 170 218 L164 220"/>
               <path d="M164 220 Q166 262 164 302 L162 322 Q160 328 156 328 L152 328 Q148 328 146 322 L144 302"/>
-              <!-- Heels -->
               <path d="M60 474 Q56 478 54 484 L58 488 Q64 490 72 488 L74 474"/>
               <path d="M140 474 Q144 478 146 484 L142 488 Q136 490 128 488 L126 474"/>
             </g>
-
-            <!-- Back clickable zones -->
-            <!-- Head back -->
             <ellipse class="vis-zone" data-zone="head" cx="100" cy="36" rx="28" ry="32"/>
-            <!-- Neck back -->
             <rect class="vis-zone" data-zone="neck_back" x="84" y="58" width="32" height="20" rx="4"/>
-            <!-- Upper back / shoulder blades -->
             <path class="vis-zone" data-zone="upperback" d="M60 80 Q100 74 140 80 L136 160 Q100 168 64 160 Z"/>
-            <!-- Left shoulder -->
             <path class="vis-zone" data-zone="shoulder" d="M28 94 Q50 86 56 126 L40 156 Q22 140 24 114 Z"/>
-            <!-- Right shoulder -->
             <path class="vis-zone" data-zone="shoulder" d="M172 94 Q150 86 144 126 L160 156 Q178 140 176 114 Z"/>
-            <!-- Tricep / back upper arm -->
             <path class="vis-zone" data-zone="tricep" d="M26 148 L40 140 L56 280 L42 288 Z"/>
             <path class="vis-zone" data-zone="tricep" d="M174 148 L160 140 L144 280 L158 288 Z"/>
-            <!-- Lower back -->
             <path class="vis-zone" data-zone="lowerback" d="M64 164 Q100 174 136 164 L134 214 Q100 224 66 214 Z"/>
-            <!-- Glutes -->
             <path class="vis-zone" data-zone="glutes" d="M58 218 Q100 208 142 218 L144 272 Q100 286 56 272 Z"/>
-            <!-- Back of thigh (hamstring) -->
             <path class="vis-zone" data-zone="hamstring" d="M56 278 Q78 268 80 352 L62 360 Q50 340 50 308 Z"/>
             <path class="vis-zone" data-zone="hamstring" d="M144 278 Q122 268 120 352 L138 360 Q150 340 150 308 Z"/>
-            <!-- Calf back -->
             <path class="vis-zone" data-zone="calf" d="M56 366 L76 360 L78 448 L58 454 Z"/>
             <path class="vis-zone" data-zone="calf" d="M144 366 L124 360 L122 448 L142 454 Z"/>
-            <!-- Ankle back -->
             <path class="vis-zone" data-zone="ankle" d="M54 456 L78 452 L74 486 L50 482 Z"/>
             <path class="vis-zone" data-zone="ankle" d="M146 456 L122 452 L126 486 L150 482 Z"/>
           </svg>
@@ -2474,7 +2451,9 @@
         </div>
       </div>
     </div>
-  </section>  <div class="divider"></div>
+  </section>
+
+  <div class="divider"></div>
 
   <!-- Booking -->
   <section id="booking">
@@ -2510,7 +2489,6 @@
       </div>
 
       <div class="booking-action reveal">
-        <!-- Replace 919373847246 with your actual number including country code e.g. 919876543210 -->
         <a href="https://wa.me/919373847246?text=Hi%2C%20I%27d%20like%20to%20book%20a%20tattoo%20session%20at%20AbsArt%20Tattoos." class="whatsapp-btn" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -2525,7 +2503,6 @@
         <div class="booking-contact-row">
           <div class="qr-block">
             <div class="qr-frame">
-              <!-- QR code generated via JS below for the WhatsApp link -->
               <img src="whatsapp-qr.png" style="width:184px;height:184px;object-fit:contain;border-radius:2px;">
             </div>
             <span class="qr-label">Scan to chat</span>
@@ -2533,7 +2510,6 @@
           <div class="contact-divider"></div>
           <div class="phone-block">
             <span class="phone-label">Call or WhatsApp</span>
-            <!-- Replace with your actual number -->
             <span class="phone-number">+91 93738 47246</span>
             <span class="phone-hint">Available Mon–Fri, 4pm – 11pm</span>
           </div>
@@ -2630,7 +2606,6 @@
     <div class="about-layout">
       <div class="about-image reveal">
         <div class="about-gold-bar"></div>
-        <!-- Replace with your actual photo: <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
         <div class="about-image-inner">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>
           <span>Your photo here</span>
@@ -2642,7 +2617,6 @@
         <p>I'm a tattoo artist with a deep passion for creating art that lives with you. Every piece I create is approached with the care and intention of a fine artist — not a printer.</p>
         <p>My work is rooted in the belief that a tattoo should be as unique as the person wearing it. I specialise in custom designs, working closely with each client to bring their vision to life in a way that feels truly personal.</p>
         <p>I take limited bookings each month. Not because of demand — but because every piece deserves my full attention and energy.</p>
-        <!-- Edit these numbers to match yours -->
         <div class="about-stats">
           <div>
             <div class="stat-num">6+</div>
@@ -2662,7 +2636,6 @@
         <div class="about-social">
           <div class="insta-qr-block">
             <div class="insta-qr-frame">
-              <!-- QR generated via JS pointing to Instagram profile -->
               <img src="instagram-qr.png" style="width:184px;height:184px;object-fit:contain;border-radius:2px;">
             </div>
             <span class="insta-qr-label">Scan to follow</span>
@@ -2670,7 +2643,6 @@
           <div style="width:1px;height:60px;background:var(--border);flex-shrink:0;"></div>
           <div class="insta-info">
             <span class="insta-handle-label">Follow on Instagram</span>
-            <!-- Replace absart_tattoos with your actual handle -->
             <a href="https://instagram.com/absart_tattoos" target="_blank" rel="noopener" class="insta-handle-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -2797,7 +2769,6 @@
       <div class="location-info reveal">
         <div class="location-detail">
           <div class="location-detail-label">Studio Address</div>
-          <!-- Replace with your actual address -->
           <p>304, B-Block, VR Royal Heights,<br>Singasandra, Bangalore</p>
         </div>
         <div class="location-detail">
@@ -2810,20 +2781,16 @@
         </div>
         <div class="location-detail">
           <div class="location-detail-label">Contact</div>
-          <!-- Replace with your WhatsApp number -->
           <a href="https://wa.me/919373847246">WhatsApp — tap to message</a>
         </div>
         <div class="location-detail">
           <div class="location-detail-label">Follow</div>
-          <!-- Replace with your Instagram handle -->
           <a href="https://instagram.com/absart_tattoos" target="_blank" rel="noopener">@absart_tattoos</a>
         </div>
         <a href="https://maps.app.goo.gl/srHDRR8efoKj4pUh6" target="_blank" rel="noopener" class="btn-ghost" style="display:inline-block; margin-top:1rem;">Get Directions →</a>
       </div>
 
       <div class="map-placeholder reveal">
-        <!-- Replace this entire block with a Google Maps embed if you want a real map -->
-        <!-- <iframe src="YOUR_GOOGLE_MAPS_EMBED_URL" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
         <div class="map-pin"></div>
         <p class="map-address">AbsArt Tattoos<br>Singasandra, Bangalore</p>
         <a href="https://maps.app.goo.gl/srHDRR8efoKj4pUh6" target="_blank" rel="noopener" class="map-cta">Open in Google Maps</a>
@@ -2858,19 +2825,14 @@
 
   <script>
     // ── QR Code ───────────────────────────────────────────────────────────
-    // Replace 919373847246 below with your actual number e.g. 919876543210
     const WA_NUMBER = '919373847246';
     const WA_URL = `https://wa.me/${WA_NUMBER}?text=Hi%2C%20I%27d%20like%20to%20book%20a%20tattoo%20session%20at%20AbsArt%20Tattoos.`;
 
-    // Also update the booking button href dynamically
     document.querySelectorAll('.whatsapp-btn').forEach(btn => {
       btn.href = WA_URL;
     });
 
-    // Generate QR into canvas
     window.addEventListener('DOMContentLoaded', () => {
-
-      // ── WhatsApp QR ──────────────────────────────────────────────────────
       const qrContainer = document.createElement('div');
       new QRCode(qrContainer, {
         text: WA_URL,
@@ -2886,12 +2848,9 @@
         qrCanvas.getContext('2d').drawImage(waGenerated, 0, 0, 78, 78);
       }
 
-      // ── Instagram QR ─────────────────────────────────────────────────────
-      // Replace absart_tattoos with your actual handle e.g. absarttattoos
       const INSTA_HANDLE = 'absart_tattoos';
       const INSTA_URL = `https://instagram.com/${INSTA_HANDLE}`;
 
-      // Also update all insta links dynamically
       document.querySelectorAll('.insta-handle-link').forEach(a => {
         a.href = INSTA_URL;
       });
@@ -2913,7 +2872,6 @@
       if (instaGenerated && instaCanvas) {
         instaCanvas.getContext('2d').drawImage(instaGenerated, 0, 0, 70, 70);
       }
-
     });
   </script>
 
@@ -2923,7 +2881,6 @@
     const ctx = canvas.getContext('2d');
 
     function resizeCanvas() {
-      // Preserve existing drawing on resize
       const tmp = document.createElement('canvas');
       tmp.width = canvas.width; tmp.height = canvas.height;
       tmp.getContext('2d').drawImage(canvas, 0, 0);
@@ -2935,18 +2892,15 @@
     canvas.height = window.innerHeight;
     window.addEventListener('resize', resizeCanvas);
 
-    // ── State ─────────────────────────────────────────────────────────────
     let targetX = window.innerWidth / 2;
     let targetY = window.innerHeight / 2;
     let penX = targetX, penY = targetY;
 
-    // Each point has its own birth time — fades individually (original system)
     let points = [];
-    const LERP     = 0.12;   // pen smoothing — lower = more lag
-    const MIN_DIST = 4;      // px before a new point is recorded
-    const LIFE     = 900;    // ms each point lives — fast vanish
+    const LERP     = 0.12;
+    const MIN_DIST = 4;
+    const LIFE     = 900;
 
-    // Dot cursor + ring
     const cursor = document.getElementById('cursor');
     const ring   = document.getElementById('cursorRing');
     let ringX = 0, ringY = 0;
@@ -2957,7 +2911,6 @@
       cursor.style.transform = `translate(${targetX - 4}px, ${targetY - 4}px)`;
     });
 
-    // ── Catmull-Rom smooth draw through a window of points ────────────────
     function drawSmooth(pts, getAlpha) {
       if (pts.length < 2) return;
       for (let i = 0; i < pts.length - 1; i++) {
@@ -2969,30 +2922,25 @@
         const cp1y = p1.y + (p2.y - p0.y) / 6;
         const cp2x = p2.x - (p3.x - p1.x) / 6;
         const cp2y = p2.y - (p3.y - p1.y) / 6;
-        // Alpha is the average of both endpoint ages
         const alpha = (getAlpha(p1) + getAlpha(p2)) / 2;
         if (alpha < 0.01) continue;
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
         ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
         ctx.strokeStyle = `rgba(220, 20, 20, ${alpha})`;
-        ctx.strokeStyle = `rgba(110, 15, 15, ${alpha})`;
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 2.5;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.stroke();
       }
     }
 
-    // ── Main loop ─────────────────────────────────────────────────────────
     function loop() {
       const now = Date.now();
 
-      // Smooth pen follows cursor
       penX += (targetX - penX) * LERP;
       penY += (targetY - penY) * LERP;
 
-      // Record point if pen moved enough
       const last = points[points.length - 1];
       const dx = penX - (last ? last.x : penX + 999);
       const dy = penY - (last ? last.y : penY + 999);
@@ -3000,17 +2948,14 @@
         points.push({ x: penX, y: penY, birth: now });
       }
 
-      // Cull dead points
       points = points.filter(p => (now - p.birth) < LIFE);
 
-      // Draw
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawSmooth(points, p => {
-        const t = (now - p.birth) / LIFE;   // 0=fresh → 1=dead
-        return Math.pow(1 - t, 1.5) * 0.75; // fast fade, same feel as original
+        const t = (now - p.birth) / LIFE;
+        return Math.pow(1 - t, 1.2) * 0.95;
       });
 
-      // Ring follow
       ringX += (targetX - ringX) * 0.12;
       ringY += (targetY - ringY) * 0.12;
       ring.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
@@ -3030,7 +2975,6 @@
 
     // ── Placement Visualiser ─────────────────────────────────────────────
     const ZONE_DATA = {
-      // ── Front ──
       head:      { title:'Head & Face',     desc:'Bold statements and deeply personal choices. Face and head tattoos are highly visible and carry strong meaning. Best suited for experienced collectors ready to commit.',                                               tags:['High Visibility','Bold Commitment','Statement Piece'],   styles:['Blackwork','Geometric','Fine Line','Script'],                       pain:4.5, dot:{x:50,y:7}  },
       neck:      { title:'Neck',             desc:'A powerful placement bridging the hidden and the seen. Neck tattoos frame the face beautifully and work best with clean, elegant designs that follow natural curves.',                                                   tags:['High Visibility','Elegant','Bold'],                              styles:['Fine Line','Script','Minimal','Ornamental'],                 pain:4,   dot:{x:50,y:13} },
       chest:     { title:'Chest',            desc:'One of the most meaningful placements — close to the heart. A large canvas with natural symmetry. Hidden when needed, revealed when chosen.',                                                                            tags:['Intimate','Large Canvas','Symmetrical'],                         styles:['Blackwork','Neo-traditional','Illustrative','Geometric'],    pain:3,   dot:{x:50,y:24} },
@@ -3042,7 +2986,6 @@
       thigh:     { title:'Thigh',            desc:'A large, flat canvas with relatively low pain. Hidden in everyday wear but dramatic and bold. One of the best spots for large statement pieces.',                                                                        tags:['Large Canvas','Low Pain','Dramatic'],                           styles:['Blackwork','Neo-traditional','Illustrative','Geometric'],    pain:2,   dot:{x:23,y:64} },
       calf:      { title:'Calf',             desc:'Visible in shorts, hidden otherwise. Great muscle definition adds depth to detailed designs. Works especially well with flowing or vertical compositions.',                                                              tags:['Seasonal Reveal','Detailed','Vertical'],                        styles:['Traditional','Fine Line','Blackwork','Illustrative'],        pain:2.5, dot:{x:21,y:80} },
       ankle:     { title:'Ankle & Foot',     desc:'Delicate and understated. Ankle tattoos are small, charming, and personal. Note that foot tattoos may need touch-ups over time due to skin wear.',                                                                      tags:['Delicate','Small','Understated'],                               styles:['Fine Line','Minimal','Script','Botanical'],                  pain:3.5, dot:{x:21,y:92} },
-      // ── Back ──
       neck_back: { title:'Back of Neck',     desc:'Subtle yet striking — visible when hair is up, hidden when it\'s down. The nape is ideal for small, elegant pieces that peek out just enough to intrigue.',                                                            tags:['Subtle','Elegant','Peekaboo'],                                  styles:['Fine Line','Minimal','Script','Geometric'],                  pain:4,   dot:{x:50,y:13} },
       upperback: { title:'Upper Back',       desc:'One of the most sought-after placements. The upper back offers a wide, flat canvas perfect for large, centred pieces or detailed symmetrical work. Shoulder blades give great natural framing.',                        tags:['Large Canvas','Symmetrical','Statement'],                       styles:['Blackwork','Neo-traditional','Geometric','Illustrative'],    pain:3,   dot:{x:50,y:25} },
       shoulder:  { title:'Shoulder',         desc:'The shoulder wraps beautifully and connects seamlessly into arm and back pieces. Great for bold standalone work or as an anchor point for a sleeve or back piece.',                                                     tags:['Sleeve Anchor','Bold','Versatile'],                             styles:['Traditional','Blackwork','Neo-traditional','Geometric'],     pain:2.5, dot:{x:18,y:22} },
@@ -3062,7 +3005,6 @@
       document.getElementById('svgBack').style.display  = view === 'back'  ? 'block' : 'none';
       document.getElementById('btnFront').classList.toggle('active', view === 'front');
       document.getElementById('btnBack').classList.toggle('active',  view === 'back');
-      // Re-bind zones for new svg
       bindZones();
     }
 
@@ -3082,7 +3024,6 @@
       document.getElementById('visTags').innerHTML    = d.tags.map(t=>`<span class="vis-tag">${t}</span>`).join('');
       document.getElementById('visStyles').innerHTML  = d.styles.map(s=>`<span class="vis-style-pill">${s}</span>`).join('');
 
-      // Move pulsing dot
       const svgEl  = visWrap.querySelector('.vis-body-svg:not([style*="none"])') || visWrap.querySelector('.vis-body-svg');
       const svgRect = svgEl.getBoundingClientRect();
       const wrapRect = visWrap.getBoundingClientRect();
@@ -3107,7 +3048,6 @@
 
     function bindZones() {
       document.querySelectorAll('.vis-zone').forEach(zone => {
-        // Remove old listeners by cloning
         const fresh = zone.cloneNode(true);
         zone.parentNode.replaceChild(fresh, zone);
       });
@@ -3126,7 +3066,7 @@
     }
 
     document.getElementById('visReset').addEventListener('click', resetVis);
-    bindZones(); // initial bind
+    bindZones();
 
     // ── Mood Board ────────────────────────────────────────────────────────
     const mbSelections = { style: null, vibe: null, size: null };
@@ -3135,8 +3075,6 @@
     const mbLoading = document.getElementById('mbLoading');
     const mbContent = document.getElementById('mbContent');
 
-    // ── Direction library — style × vibe combos ───────────────────────────
-    // Each entry covers a style+vibe pair. Size adjusts the suggestions.
     const DIRECTIONS = {
       'Fine Line|Dark & Moody': {
         title: 'Quiet Darkness, <em>Precisely Drawn</em>',
@@ -3260,7 +3198,6 @@
       }
     };
 
-    // Size modifiers — appended to suggestions based on size pick
     const SIZE_NOTES = {
       'Tiny & Delicate (coin-sized)':    'Keep it small and precise — placement is everything at this scale. Consider the inner wrist, behind the ear, or the ankle.',
       'Medium (palm-sized)':             'Medium scale gives room for detail without overwhelming. Upper arm, forearm, or thigh are ideal canvases.',
@@ -3269,17 +3206,12 @@
     };
 
     function getDirection(style, vibe, size) {
-      // Try exact match first
       let key = `${style}|${vibe}`;
       let d = DIRECTIONS[key];
-
-      // Fallback: find any entry with matching style
       if (!d) {
         const fallbackKey = Object.keys(DIRECTIONS).find(k => k.startsWith(style + '|'));
         d = fallbackKey ? DIRECTIONS[fallbackKey] : null;
       }
-
-      // Final fallback
       if (!d) {
         d = {
           title: 'A Direction <em>All Your Own</em>',
@@ -3287,17 +3219,11 @@
           suggestions: ['Start with a mood board of references — images, textures, feelings', 'Think about what the tattoo should mean in 20 years, not just today', 'Trust the process — the best work comes from a real conversation']
         };
       }
-
-      // Add size note as a 4th suggestion
       const sizeNote = SIZE_NOTES[size];
-      const suggestions = sizeNote
-        ? [...d.suggestions, sizeNote]
-        : d.suggestions;
-
+      const suggestions = sizeNote ? [...d.suggestions, sizeNote] : d.suggestions;
       return { ...d, suggestions };
     }
 
-    // Chip selection — one per group
     document.querySelectorAll('.mb-chips').forEach(group => {
       const groupName = group.dataset.group;
       group.querySelectorAll('.mb-chip').forEach(chip => {
@@ -3319,8 +3245,6 @@
 
     function generateMoodBoard() {
       const { style, vibe, size } = mbSelections;
-
-      // Show result panel with brief loading delay for effect
       mbResult.classList.add('show');
       mbContent.classList.remove('show');
       mbLoading.style.display = 'flex';
@@ -3331,17 +3255,15 @@
 
       setTimeout(() => {
         const result = getDirection(style, vibe, size);
-
         document.getElementById('mbTitle').innerHTML = result.title;
         document.getElementById('mbBody').textContent = result.body;
         document.getElementById('mbSuggestions').innerHTML = result.suggestions
           .map(s => `<div class="mb-suggestion"><div class="mb-suggestion-dot"></div><span>${s}</span></div>`)
           .join('');
-
         mbLoading.style.display = 'none';
         mbContent.classList.add('show');
         mbGenerateBtn.disabled = false;
-      }, 900); // small delay feels intentional, not instant
+      }, 900);
     }
 
     // ── Style Quiz ────────────────────────────────────────────────────────
@@ -3432,21 +3354,14 @@
         sqContainer.appendChild(div);
       });
 
-      // Bind clicks
       document.querySelectorAll('.sq-option').forEach(btn => {
         btn.addEventListener('click', () => {
           const qi = parseInt(btn.dataset.qi);
           const oi = parseInt(btn.dataset.oi);
           const opt = SQ_QUESTIONS[qi].options[oi];
-
-          // Visual feedback
           document.querySelectorAll(`#sqQ${qi} .sq-option`).forEach(b => b.classList.remove('chosen'));
           btn.classList.add('chosen');
-
-          // Score
           Object.entries(opt.scores).forEach(([k, v]) => { sqScores[k] = (sqScores[k] || 0) + v; });
-
-          // Advance after short delay
           setTimeout(() => sqNext(qi), 380);
         });
       });
@@ -3455,12 +3370,10 @@
     function sqNext(qi) {
       document.getElementById(`sqQ${qi}`).classList.remove('active');
       sqCurrent = qi + 1;
-
       if (sqCurrent >= SQ_QUESTIONS.length) {
         sqShowResult();
         return;
       }
-
       document.getElementById(`sqQ${sqCurrent}`).classList.add('active');
       const pct = ((sqCurrent) / SQ_QUESTIONS.length) * 100;
       sqProgress.style.width = pct + '%';
@@ -3470,15 +3383,11 @@
     function sqShowResult() {
       sqProgress.style.width = '100%';
       sqLabel.textContent = 'Complete';
-
-      // Find top scorer
       const top = Object.entries(sqScores).sort((a, b) => b[1] - a[1])[0][0];
       const r = SQ_RESULTS[top];
-
       document.getElementById('sqResultTitle').innerHTML = r.title;
       document.getElementById('sqResultDesc').textContent = r.desc;
       document.getElementById('sqResultTraits').innerHTML = r.traits.map(t => `<span class="sq-trait">${t}</span>`).join('');
-
       sqContainer.style.display = 'none';
       sqResult.style.display = 'block';
       requestAnimationFrame(() => requestAnimationFrame(() => sqResult.classList.add('show')));
@@ -3496,11 +3405,11 @@
     }
 
     document.getElementById('sqRetake').addEventListener('click', sqReset);
-    sqBuild(); // initialise
+    sqBuild();
 
     // ── Portfolio Slider ──────────────────────────────────────────────────
     (function() {
-      const SLIDE_DURATION = 5500; // ms per slide
+      const SLIDE_DURATION = 5500;
       const track    = document.getElementById('pfTrack');
       const wrap     = document.getElementById('pfWrap');
       const progress = document.getElementById('pfProgress');
@@ -3509,10 +3418,8 @@
       const total    = slides.length;
       let current    = 0;
       let autoTimer  = null;
-      let progTimer  = null;
       let paused     = false;
 
-      // Build dots
       dotsEl.innerHTML = slides.map((_, i) =>
         `<button class="pf-dot${i===0?' active':''}" onclick="pfGoTo(${i})"></button>`
       ).join('');
@@ -3525,18 +3432,14 @@
         current = (idx + total) % total;
         slides[current].classList.add('active');
 
-        // Translate track so active slide is centred in viewport
-        const slideW = slides[0].offsetWidth + 24; // gap 1.5rem ≈ 24px
+        const slideW = slides[0].offsetWidth + 24;
         track.style.transform = `translateX(-${current * slideW}px)`;
 
-        // Buttons
         document.getElementById('pfPrev').disabled = current === 0;
         document.getElementById('pfNext').disabled = current === total - 1;
 
-        // Dots
         dotsEl.querySelectorAll('.pf-dot').forEach((d, i) => d.classList.toggle('active', i === current));
 
-        // Reset progress bar
         progress.style.transition = 'none';
         progress.style.width = '0%';
         requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -3551,7 +3454,6 @@
       }
 
       function startAuto() {
-        // Restart progress bar
         progress.style.transition = 'none';
         progress.style.width = '0%';
         requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -3564,11 +3466,9 @@
         }, SLIDE_DURATION);
       }
 
-      // Pause on hover
       wrap.addEventListener('mouseenter', () => { paused = true; clearTimeout(autoTimer); progress.style.transition = 'none'; });
       wrap.addEventListener('mouseleave', () => { paused = false; resetAuto(); });
 
-      // Touch swipe
       let touchStartX = 0;
       wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
       wrap.addEventListener('touchend',   e => {
@@ -3576,13 +3476,11 @@
         if (Math.abs(dx) > 40) { pfMove(dx < 0 ? 1 : -1); }
       }, { passive: true });
 
-      // Keyboard arrows
       document.addEventListener('keydown', e => {
         if (e.key === 'ArrowLeft')  pfMove(-1);
         if (e.key === 'ArrowRight') pfMove(1);
       });
 
-      // Kick off
       pfSet(0);
       startAuto();
     })();
@@ -3613,7 +3511,6 @@
             const href = a.getAttribute('href') || '';
             a.classList.toggle('nav-active', href === '#' + id);
           });
-          // Update mobile tab active state
           document.querySelectorAll('.mob-tab[data-section]').forEach(t => {
             t.classList.toggle('nav-active', t.dataset.section === id);
           });
@@ -3632,7 +3529,7 @@
       const maxIdx = TESTI_TOTAL - vis;
       testiIdx = Math.max(0, Math.min(testiIdx + dir, maxIdx));
       const track = document.getElementById('testiTrack');
-      const cardW = track.children[0].getBoundingClientRect().width + 24; // gap = 1.5rem ≈ 24px
+      const cardW = track.children[0].getBoundingClientRect().width + 24;
       track.style.transform = `translateX(-${testiIdx * cardW}px)`;
       document.getElementById('testiBtnPrev').disabled = testiIdx === 0;
       document.getElementById('testiBtnNext').disabled = testiIdx >= maxIdx;
